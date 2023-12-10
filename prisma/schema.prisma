@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @map("_id") 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  username  String @unique
+  avatarUrl String?
+
+  guilds GuildUser[]
+}
+
+model GuildUser {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  userId String 
+  user   User   @relation(fields: [userId], references: [id])
+
+  guildId String 
+  guild   Guild  @relation(fields: [guildId], references: [id])
+
+  owner          Boolean
+  permissions    Int
+  newPermissions String
+
+  @@unique([userId, guildId])
+}
+
+model Guild {
+  id        String   @id @map("_id") 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users GuildUser[]
+
+  name        String
+  iconUrl     String
+  memberCount Int
+}

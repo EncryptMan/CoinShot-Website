@@ -1,0 +1,58 @@
+{
+    id: '1160134674337771580',
+    name: 'CoinShot 🚀',
+    icon: '2c8ff33a907bf89ca2a07db40ebae77a',
+    owner: true,
+    permissions: 2147483647,
+    permissions_new: '562949953421311',
+    features: [ 'CHANNEL_ICON_EMOJIS_GENERATED', 'NEWS', 'COMMUNITY' ],
+    approximate_member_count: 11,
+    approximate_presence_count: 4
+  }
+
+user
+
+  {
+  user: {
+    id: '1061669636610994196',
+    name: 'encryptman',
+    email: 'warbler.bark-0m@icloud.com',
+    image: 'https://cdn.discordapp.com/avatars/1061669636610994196/121f3e2975d47a798c9a147703468a34.png'
+  },
+  account: {
+    provider: 'discord',
+    type: 'oauth',
+    providerAccountId: '1061669636610994196',
+    token_type: 'Bearer',
+    access_token: 'l2sio3palvFCM2GUJhutUR00j7BpMc',
+    expires_at: 1702314787,
+    refresh_token: 'LXIzGMdGvJ7gVem2uAS5n5loSiliEM',
+    scope: 'guilds.members.read guilds email identify'
+  },
+  profile: {
+    id: '1061669636610994196',
+    username: 'encryptman',
+    avatar: '121f3e2975d47a798c9a147703468a34',
+    discriminator: '0',
+    public_flags: 0,
+    premium_type: 0,
+    flags: 0,
+    banner: null,
+    accent_color: null,
+    global_name: 'EncryptMan',
+    avatar_decoration_data: null,
+    banner_color: null,
+    mfa_enabled: true,
+    locale: 'en-US',
+    email: 'warbler.bark-0m@icloud.com',
+    verified: true,
+    image_url: 'https://cdn.discordapp.com/avatars/1061669636610994196/121f3e2975d47a798c9a147703468a34.png'
+  }
+}
+{
+  user: {
+    name: 'encryptman',
+    email: 'warbler.bark-0m@icloud.com',
+    image: 'https://cdn.discordapp.com/avatars/1061669636610994196/121f3e2975d47a798c9a147703468a34.png'
+  }
+}
