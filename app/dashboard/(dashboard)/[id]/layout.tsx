@@ -1,7 +1,7 @@
-import Sidebar from "../../_components/Sidebar";
-import Navbar from '../../_components/Navbar';
+import Sidebar from "./_components/Sidebar";
+import Navbar from './_components/Navbar';
 import { Toaster } from "@/components/ui/sonner"
-import ActiveIdProvider from "../../_components/ActiveIdProvider";
+import ActiveIdProvider from "./_components/ActiveIdProvider";
 
 
 export default function Layout({ params, children }: { params: { id: string }, children: React.ReactNode }) {

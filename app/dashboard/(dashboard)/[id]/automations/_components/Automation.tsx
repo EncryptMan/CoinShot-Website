@@ -1,7 +1,7 @@
 'use client'
 
 import { LoadingSpinner } from "@/app/components/LoadingSpinner";
-import { ActiveIdContext } from "@/app/dashboard/_components/ActiveIdProvider";
+import { ActiveIdContext } from "@/app/dashboard/(dashboard)/[id]/_components/ActiveIdProvider";
 import { setGuildAutomationChannel, setGuildAutomationEnabled } from "@/app/lib/actions";
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";

@@ -54,7 +54,7 @@ export default function ServerCard({ guild }: { guild: Guild }) {
     );
 }
 
-ServerCard.Skeleton = () => {
+ServerCard.Skeleton = function SeverCardSkeleton () {
     return (
         <div className="w-full">
             <Skeleton className="w-full h-40" />

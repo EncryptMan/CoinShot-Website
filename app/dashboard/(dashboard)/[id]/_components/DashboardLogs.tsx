@@ -16,9 +16,9 @@ function formatLogDate(date: Date) {
     }
 }
 
-export default async function DashboardLogs({ guildId, className }: { guildId: string, className?: string}) {
+export default async function DashboardLogs({ guildId, className }: { guildId: string, className?: string }) {
     const guildDashboardLogs = await fetchGuildDashboardLogs(guildId);
-    
+
     return (
         <Card className={cn(`bg-slate-700 flex-grow w-full`, className)}>
             <h1 className="font-semibold text-2xl px-5 pt-4 pb-2">Recent Dashboard Activity</h1>
@@ -47,6 +47,8 @@ export default async function DashboardLogs({ guildId, className }: { guildId: s
     )
 }
 
-DashboardLogs.Skeleton = () => (
-    <Skeleton className="flex-grow w-full" />
-)
+DashboardLogs.Skeleton = function DashboardLogsSkeleton() {
+    return (
+        <Skeleton className="flex-grow w-full" />
+    )
+}

@@ -4,7 +4,7 @@ import { createContext } from "react";
 
 export const ActiveIdContext = createContext("");
 
-export default async function ActiveIdProvider({ children, activeId }: { children: React.ReactNode, activeId: string }) {
+export default function ActiveIdProvider({ children, activeId }: { children: React.ReactNode, activeId: string }) {
     return (
         <ActiveIdContext.Provider value={activeId}>
             {children}

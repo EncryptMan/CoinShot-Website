@@ -1,4 +1,4 @@
-import ServerCard from "@/app/components/ServerCard";
+import ServerCard from "@/app/dashboard/_components/ServerCard";
 import { Guild } from "@prisma/client";
 import { fetchGuilds } from "@/app/lib/actions";
 
@@ -28,7 +28,7 @@ export default async function ServersView() {
     );
 }
 
-ServersView.Skeleton = () => {
+ServersView.Skeleton = function ServerViewSkeleton () {
     return (
         <>
             <ServerCard.Skeleton />
