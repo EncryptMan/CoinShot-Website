@@ -6,8 +6,9 @@ declare module 'next-auth' {
 
   interface User {
     id?: string;
+    globalName: string | null;
+    discriminator?: string;
     accessToken?: string;
-    accessTokenType?: string;
   }
 
   interface Session extends DefaultSession {
@@ -19,8 +20,9 @@ declare module 'next-auth' {
 declare module 'next-auth/jwt' {
   interface JWT {
     id?: string;
+    globalName: string | null;
+    discriminator?: string;
     accessToken?: string;
-    accessTokenType?: string;
   }
 }
 
@@ -28,6 +30,11 @@ import { Profile } from 'next-auth';
 
 declare module 'next-auth' {
   interface Profile {
+    id: string;
     username: string;
+    discriminator: string;
+    global_name: string | null;
   }
 }
+
+import { Account } from 'next-auth';

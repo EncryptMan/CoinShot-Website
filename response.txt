@@ -56,3 +56,38 @@ user
     image: 'https://cdn.discordapp.com/avatars/1061669636610994196/121f3e2975d47a798c9a147703468a34.png'
   }
 }
+
+
+{
+  id: '710599512636260412',
+  username: 'ANAS_17',
+  avatar: 'bb8a8b91e21f9215a18df58bbd3e0212',
+  discriminator: '5831',
+  public_flags: 0,
+  premium_type: 0,
+  flags: 0,
+  banner: null,
+  accent_color: 16777215,
+  global_name: null,
+  avatar_decoration_data: null,
+  banner_color: '#ffffff',
+  mfa_enabled: false,
+  locale: 'en-GB',
+  image_url: 'https://cdn.discordapp.com/avatars/710599512636260412/bb8a8b91e21f9215a18df58bbd3e0212.png'
+}
+{
+  id: '710599512636260412',
+  name: 'ANAS_17',
+  email: undefined,
+  image: 'https://cdn.discordapp.com/avatars/710599512636260412/bb8a8b91e21f9215a18df58bbd3e0212.png'
+}
+{
+  provider: 'discord',
+  type: 'oauth',
+  providerAccountId: '710599512636260412',
+  token_type: 'Bearer',
+  access_token: 'HPqVzG525maQmsIzjtL8bRaAcRtygf',
+  expires_at: 1706681525,
+  refresh_token: 'ClUzDw1y6EtPBxhzPZv9cEA0OvCSUA',
+  scope: 'guilds identify'
+}

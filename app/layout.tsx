@@ -5,6 +5,7 @@ import { getServerSession } from 'next-auth'
 import SessionProvider from '@/app/components/SessionProvider'
 import { siteConfig } from '@/site.config'
 import { ThemeProvider } from './components/ThemeProvider'
+import authOptions from '@/auth.options'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,7 +28,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   // console.log(session);
 
 
@@ -35,13 +36,13 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} bg-gray-800`} suppressHydrationWarning={true}>
         <SessionProvider session={session}>
-        <ThemeProvider
+          <ThemeProvider
             attribute="class"
             defaultTheme="dark"
             enableSystem={false}
             disableTransitionOnChange
           >
-          {children}
+            {children}
           </ThemeProvider>
         </SessionProvider>
       </body>

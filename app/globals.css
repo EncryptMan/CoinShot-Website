@@ -3,6 +3,12 @@
 @tailwind utilities;
  
 
+html {
+  --scroll-behavior: smooth!important;
+  scroll-behavior: smooth!important;
+  scroll-padding-top: 100px;
+  }
+
 @layer base {
   :root {
     --background: 0 0% 100%;

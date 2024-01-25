@@ -11,23 +11,26 @@ datasource db {
 }
 
 model User {
-  id        String   @id @map("_id") 
+  id        String   @id @map("_id")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  username  String @unique
-  avatarUrl String?
+  globalName    String
+  username      String  @unique
+  discriminator String
+  avatarUrl     String?
 
   guilds GuildUser[]
+  logs   DashboardLog[]
 }
 
 model GuildUser {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  userId String 
+  userId String
   user   User   @relation(fields: [userId], references: [id])
 
-  guildId String 
+  guildId String
   guild   Guild  @relation(fields: [guildId], references: [id])
 
   owner          Boolean
@@ -38,13 +41,71 @@ model GuildUser {
 }
 
 model Guild {
-  id        String   @id @map("_id") 
+  id        String   @id @map("_id")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   users GuildUser[]
+  logs  DashboardLog[]
+
+  guildSettings    GuildSettings?
+  guildCommands    GuildCommands?
+  guildAutomations GuildAutomations?
 
   name        String
   iconUrl     String
   memberCount Int
+  ownerId     String?
+  botPresent  Boolean @default(false)
+}
+
+model GuildSettings {
+  id    String @id @map("_id")
+  guild Guild  @relation(fields: [id], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  dataSource String @default("All Exchanges")
+}
+
+model GuildCommands {
+  id    String @id @map("_id")
+  guild Guild  @relation(fields: [id], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  price          Boolean @default(true)
+  chart          Boolean @default(true)
+  heatmap        Boolean @default(true)
+  fearGreedIndex Boolean @default(true)
+  meme           Boolean @default(true)
+}
+
+model GuildAutomations {
+  id    String @id @map("_id")
+  guild Guild  @relation(fields: [id], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  heatmap          Boolean @default(false)
+  heatmapChannelId String?
+
+  fearGreedIndex          Boolean @default(false)
+  fearGreedIndexChannelId String?
+}
+
+model DashboardLog {
+  id        String   @id @default(uuid()) @map("_id")
+  createdAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  guild   Guild  @relation(fields: [guildId], references: [id])
+  guildId String
+
+  message String
 }

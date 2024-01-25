@@ -1,0 +1,97 @@
+{
+    "any": [
+        {
+            "id": "1139511396602744892",
+            "type": 4,
+            "flags": 0,
+            "guild_id": "1139511395713548338",
+            "name": "Text Channels",
+            "parent_id": null,
+            "position": 0,
+            "permission_overwrites": []
+        },
+        {
+            "id": "1139511396602744895",
+            "type": 0,
+            "last_message_id": "1195396206080315422",
+            "flags": 0,
+            "guild_id": "1139511395713548338",
+            "name": "normal",
+            "parent_id": "1139511396602744892",
+            "rate_limit_per_user": 0,
+            "topic": null,
+            "position": 0,
+            "permission_overwrites": [],
+            "nsfw": false
+        },
+        {
+            "id": "1161959187245445130",
+            "type": 0,
+            "last_message_id": "1187709937514721301",
+            "flags": 0,
+            "guild_id": "1139511395713548338",
+            "name": "private-test",
+            "parent_id": "1139511396602744892",
+            "rate_limit_per_user": 0,
+            "topic": null,
+            "position": 1,
+            "permission_overwrites": [
+                {
+                    "id": "1139511395713548338",
+                    "type": "role",
+                    "allow": 0,
+                    "deny": 1024,
+                    "allow_new": "0",
+                    "deny_new": "1024"
+                }
+            ],
+            "nsfw": false
+        },
+        {
+            "id": "1187393677652410380",
+            "type": 0,
+            "last_message_id": "1187710546477322260",
+            "flags": 0,
+            "guild_id": "1139511395713548338",
+            "name": "restricted",
+            "parent_id": "1139511396602744892",
+            "rate_limit_per_user": 0,
+            "topic": null,
+            "position": 2,
+            "permission_overwrites": [
+                {
+                    "id": "1139511395713548338",
+                    "type": "role",
+                    "allow": 0,
+                    "deny": 2048,
+                    "allow_new": "0",
+                    "deny_new": "2048"
+                }
+            ],
+            "nsfw": false
+        },
+        {
+            "id": "1188802595033190450",
+            "type": 0,
+            "last_message_id": "1189244452800315394",
+            "flags": 0,
+            "guild_id": "1139511395713548338",
+            "name": "heatmap",
+            "parent_id": "1139511396602744892",
+            "rate_limit_per_user": 0,
+            "topic": null,
+            "position": 3,
+            "permission_overwrites": [
+                {
+                    "id": "1139511395713548338",
+                    "type": "role",
+                    "allow": 0,
+                    "deny": 0,
+                    "allow_new": "0",
+                    "deny_new": "0"
+                }
+            ],
+            "nsfw": false
+        }
+    ]
+}
