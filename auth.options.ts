@@ -1,4 +1,3 @@
-import NextAuth from "next-auth"
 import DiscordProvider from "next-auth/providers/discord";
 import { AuthOptions } from "next-auth";
 import { prisma } from "@/utils/db";
@@ -64,139 +63,23 @@ const authOptions: AuthOptions = {
                 return false;
             };
 
-            // console.log(profile);
-            // console.log(user);
-            // console.log(account);
-
             try {
-                // Update the user's info in the database
-                const userModel = await prisma.user.upsert({
-                    where: {
-                        id: profile.id,
-                    },
-                    update: {
-                        globalName: profile.global_name ?? profile.username,
-                        username: profile.username,
-                        discriminator: profile.discriminator,
-                        avatarUrl: user.image,
-                    },
-                    create: {
-                        id: profile.id,
-                        globalName: profile.global_name ?? profile.username,
-                        username: profile.username,
-                        discriminator: profile.discriminator,
-                        avatarUrl: user.image,
-                    },
-                });
-
-                // Get the user's guilds
-                const userGuildsData = await axios.get('https://discord.com/api/users/@me/guilds', {
+                await axios.post(`${process.env.COINSHOT_SERVICES_API}/signin`, {
+                    profile,
+                    user,
+                    account
+                }, {
                     headers: {
-                        Authorization: `Bearer ${account?.access_token}`,
+                        'x-api-key': process.env.COINSHOT_SERVICES_KEY,
                     },
                     timeout: 10000,
-                    params: {
-                        with_counts: true,
-                    }
                 });
-
-                // Get the bot's guilds (for checking if the bot is in the guild)
-                const botGuildIds = (await axios.get('https://discord.com/api/users/@me/guilds', {
-                    headers: {
-                        Authorization: `Bot ${process.env.DISCORD_BOT_TOKEN}`,
-                    },
-                    timeout: 10000,
-                })).data.map((guild: { id: any; }) => guild.id);
-
-                const manageChannelPermission = BigInt(0x10); // The bit for the MANAGE_CHANNELS permission
-
-                // filter out guilds that the user doesn't have the MANAGE_CHANNELS permission in
-                const userGuildsWithPermission = userGuildsData.data.filter((guild: { permissions_new: string | number | bigint | boolean; }) =>
-                    (BigInt(guild.permissions_new) & manageChannelPermission) !== BigInt(0)
-                )
-
-                // Update the user's guilds in the database
-                for (const guild of userGuildsWithPermission) {
-
-                    const iconSrc = guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png` : 'https://cdn.discordapp.com/embed/avatars/0.png';
-
-                    const botPresent = botGuildIds.includes(guild.id);
-
-                    // Update the guild's info in the database
-                    await prisma.guild.upsert({
-                        where: {
-                            id: guild.id,
-                        },
-                        update: {
-                            name: guild.name,
-                            iconUrl: iconSrc,
-                            memberCount: guild.approximate_member_count,
-                            botPresent,
-                        },
-                        create: {
-                            id: guild.id,
-                            name: guild.name,
-                            iconUrl: iconSrc,
-                            memberCount: guild.approximate_member_count,
-                            botPresent,
-                        },
-                    });
-
-
-                    // Update the user's guild profile in the database
-                    try {
-                        await prisma.guildUser.upsert({
-                            where: {
-                                userId_guildId: {
-                                    userId: profile.id,
-                                    guildId: guild.id,
-                                },
-                            },
-                            update: {
-                                owner: guild.owner,
-                                permissions: guild.permissions,
-                                newPermissions: guild.permissions_new,
-                            },
-                            create: {
-                                userId: profile.id,
-                                guildId: guild.id,
-                                owner: guild.owner,
-                                permissions: guild.permissions,
-                                newPermissions: guild.permissions_new,
-                            },
-                        });
-                    } catch (error) {
-                        console.error(error);
-                    }
-                }
-
-                // filter out guilds that the user have the MANAGE_CHANNELS permission in
-                // const userGuildsWithoutPermission = userGuildsData.data.filter((guild: { permissions_new: string | number | bigint | boolean; }) =>
-                //     (BigInt(guild.permissions_new) & manageChannelPermission) === BigInt(0)
-                // )
-
-                // // delete guild user if user doesn't have the MANAGE_CHANNELS permission in the guild
-                // for (const guild of userGuildsWithoutPermission) {
-                //     try {
-                //         await prisma.guildUser.delete({
-                //             where: {
-                //                 userId_guildId: {
-                //                     userId: profile.id,
-                //                     guildId: guild.id,
-                //                 },
-                //             },
-                //         });
-                //     } catch (error) {
-                //         console.error(error);
-                //     }
-                // }
-
             } catch (error) {
-                console.log(error);
+                console.error(error);
             }
 
-
             return true;
+
         }
     }
 };

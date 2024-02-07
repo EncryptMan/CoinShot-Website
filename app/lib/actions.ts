@@ -270,6 +270,8 @@ export async function fetchGuildDashboardLogs(guildId: string) {
 
 export async function setGuildDataSource(guildId: string, source: string) {
   try {
+    authorizeUser(guildId);
+
     await prisma.guildSettings.update({
       where: {
         id: guildId,
@@ -292,6 +294,8 @@ export async function setGuildDataSource(guildId: string, source: string) {
 
 export async function setGuildCommandEnabled(guildId: string, command: string, enabled: boolean) {
   try {
+    authorizeUser(guildId);
+
     await prisma.guildCommands.update({
       where: {
         id: guildId,
@@ -316,6 +320,8 @@ export async function setGuildCommandEnabled(guildId: string, command: string, e
 
 export async function setGuildAutomationEnabled(guildId: string, automation: string, enabled: boolean) {
   try {
+    authorizeUser(guildId);
+
     await prisma.guildAutomations.update({
       where: {
         id: guildId,
@@ -340,6 +346,8 @@ export async function setGuildAutomationEnabled(guildId: string, automation: str
 
 export async function setGuildAutomationChannel(guildId: string, automation: string, channelId: string) {
   try {
+    authorizeUser(guildId);
+
     await prisma.guildAutomations.update({
       where: {
         id: guildId,
@@ -381,4 +389,16 @@ export async function logDashboardActivity(guildId: string, message: string) {
   } catch (error) {
     console.error(error);
   }
+}
+
+async function authorizeUser(guildId: string) {
+  const session = await getServerSession(authOptions);
+    const guildUserCount = await prisma.guildUser.count({
+      where: {
+        userId: session?.user?.id,
+        guildId,
+      },
+    });
+
+    if (guildUserCount === 0) throw new Error('User is not authorized to perform this action');
 }
