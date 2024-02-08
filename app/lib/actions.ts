@@ -11,6 +11,8 @@ import { Guild } from "@prisma/client";
 export async function fetchGuilds() {
   const session = await getServerSession(authOptions);
 
+  if (!session?.user?.id) return [];
+
   try {
     const guildUsers = await prisma.guildUser.findMany({
       where: {
