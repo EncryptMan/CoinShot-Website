@@ -24,7 +24,7 @@ export default async function Page({ params }: { params: { id: string }}) {
                         displayName="Fear and Greed Index" 
                         name="fearGreedIndex" 
                         description="Send fear and green index daily" 
-                        enabled={guildAutomations.heatmap} 
+                        enabled={guildAutomations.fearGreedIndex} 
                         currentChannelId={guildAutomations.fearGreedIndexChannelId} 
                         channels={guildChannels} 
                     />
