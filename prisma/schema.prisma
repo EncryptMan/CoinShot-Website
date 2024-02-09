@@ -47,6 +47,7 @@ model Guild {
 
   users GuildUser[]
   logs  DashboardLog[]
+  discordLogs DiscordLog[]
 
   guildSettings    GuildSettings?
   guildCommands    GuildCommands?
@@ -56,7 +57,9 @@ model Guild {
   iconUrl     String
   memberCount Int
   ownerId     String?
+
   botPresent  Boolean @default(false)
+  botJoinedAt DateTime?
 }
 
 model GuildSettings {
@@ -95,6 +98,9 @@ model GuildAutomations {
 
   fearGreedIndex          Boolean @default(false)
   fearGreedIndexChannelId String?
+
+  halvingCountdown          Boolean @default(false)
+  halvingCountdownChannelId String?
 }
 
 model DashboardLog {
@@ -107,5 +113,18 @@ model DashboardLog {
   guild   Guild  @relation(fields: [guildId], references: [id])
   guildId String
 
+  message String
+}
+
+model DiscordLog {
+  id        String   @id @default(uuid()) @map("_id")
+  createdAt DateTime @default(now())
+
+  guild   Guild  @relation(fields: [guildId], references: [id])
+  guildId String
+
+  user String
+  type   String
+  component String
   message String
 }

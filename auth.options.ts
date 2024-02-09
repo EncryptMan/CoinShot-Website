@@ -1,6 +1,5 @@
 import DiscordProvider from "next-auth/providers/discord";
 import { AuthOptions } from "next-auth";
-import { prisma } from "@/utils/db";
 import axios from "axios";
 
 const scopes = ['identify', 'guilds']

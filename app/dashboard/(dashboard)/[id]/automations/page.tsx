@@ -28,6 +28,14 @@ export default async function Page({ params }: { params: { id: string }}) {
                         currentChannelId={guildAutomations.fearGreedIndexChannelId} 
                         channels={guildChannels} 
                     />
+                    <Automation 
+                        displayName="Bitcoin Halving Countdown" 
+                        name="halvingCountdown" 
+                        description="Send bitcoin halving countdown daily" 
+                        enabled={guildAutomations.halvingCountdown} 
+                        currentChannelId={guildAutomations.halvingCountdownChannelId} 
+                        channels={guildChannels} 
+                    />
                 </Card>
             }
         </div>
