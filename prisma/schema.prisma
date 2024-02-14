@@ -57,6 +57,7 @@ model Guild {
   iconUrl     String
   memberCount Int
   ownerId     String?
+  generalChannelId String?
 
   botPresent  Boolean @default(false)
   botJoinedAt DateTime?
