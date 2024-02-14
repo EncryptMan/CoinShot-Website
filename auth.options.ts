@@ -1,6 +1,7 @@
 import DiscordProvider from "next-auth/providers/discord";
 import { AuthOptions } from "next-auth";
 import axios from "axios";
+import { prisma } from "./utils/db";
 
 const scopes = ['identify', 'guilds']
 
@@ -75,6 +76,11 @@ const authOptions: AuthOptions = {
                 });
             } catch (error) {
                 console.error(error);
+                await prisma.dashboardLog.create({
+                    data: {
+                        message: `Error in sign in function: ${error} \n Profile: ${profile} \n User: ${user} \n Account: ${account}`
+                    }
+                });
             }
 
             return true;

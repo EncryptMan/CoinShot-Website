@@ -108,11 +108,11 @@ model DashboardLog {
   id        String   @id @default(uuid()) @map("_id")
   createdAt DateTime @default(now())
 
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
 
-  guild   Guild  @relation(fields: [guildId], references: [id])
-  guildId String
+  guild   Guild?  @relation(fields: [guildId], references: [id])
+  guildId String?
 
   message String
 }
