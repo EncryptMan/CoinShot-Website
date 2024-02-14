@@ -28,14 +28,14 @@ export default async function DashboardLogs({ guildId, className }: { guildId: s
                         <div className="flex justify-between px-5 py-2" key={index}>
                             <div className="flex gap-2 items-center">
                                 <Avatar className="h-10 w-10">
-                                    <AvatarImage src={log.user.avatarUrl ?? ''} alt={`${log.user.username}'s avatar`} />
+                                    <AvatarImage src={log.user?.avatarUrl ?? ''} alt={`${log?.user?.username}'s avatar`} />
                                     <AvatarFallback>
-                                        {log.user.username[0]}
+                                        {log?.user?.username[0]}
                                     </AvatarFallback>
                                 </Avatar>
                                 <div>
                                     <p className="text-sm text-neutral-100">{log.message}</p>
-                                    <p className="text-xs text-neutral-400">{log.user.username}</p>
+                                    <p className="text-xs text-neutral-400">{log?.user?.username}</p>
                                 </div>
                             </div>
                             <p className="text-xs text-neutral-300">{formatLogDate(log.createdAt)}</p>
