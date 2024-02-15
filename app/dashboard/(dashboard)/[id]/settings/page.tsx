@@ -2,6 +2,7 @@ import { fetchGuildSettings } from "@/app/lib/actions";
 
 import DataSourceSetting from "./_components/DataSourceSettings";
 import { notFound } from "next/navigation";
+import DashboardPage from "../_components/DashboardPage";
 
 
 export default async function Page({ params }: { params: { id: string }}) {
@@ -14,10 +15,10 @@ export default async function Page({ params }: { params: { id: string }}) {
     }
 
     return (
-        <div className="flex-grow p-5">
-            <h1 className="text-4xl my-4">Settings</h1>
-            <DataSourceSetting guildId={guildId} sources={sources} currentSource={guildSettings?.dataSource ?? ''} />
-        </div>
+        <DashboardPage>
+            <h1 className="text-2xl font-semibold w-full">Settings</h1>
+            <DataSourceSetting guildId={guildId} sources={sources} currentSource={guildSettings?.dataSource ?? ''} className="mt-3" />
+        </DashboardPage>
     );
 }
 

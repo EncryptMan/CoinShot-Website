@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import DashboardLogs from "./_components/DashboardLogs";
 import { Suspense } from "react";
 import ServerProfile from "./_components/ServerProfile";
+import DashboardPage from "./_components/DashboardPage";
 
 export default async function Page({ params }: { params: { id: string } }) {
     const id = params.id;
@@ -15,11 +16,11 @@ export default async function Page({ params }: { params: { id: string } }) {
     }
 
     return (
-        <div className="flex-grow items-center flex flex-col p-10 gap-7">
+        <DashboardPage>
             <ServerProfile guild={guild} />
             <Suspense fallback={<DashboardLogs.Skeleton />}>
-                <DashboardLogs guildId={id} />
+                <DashboardLogs guildId={id} className="mt-3" />
             </Suspense>
-        </div>
+        </DashboardPage>
     );
 }

@@ -23,27 +23,35 @@ export default async function ServersView() {
         <>
             {guilds.length === 0 ? (
                 <span className="text-neutral-300 text-center text-lg">
-                    {"Oops! We couldn't find any servers where you're an admin or moderator. If you've just logged in, please take a moment to refresh the page. Still no luck? Try logging in again and we'll do our best to update your information. Need more help? Feel free to join our support server. We appreciate your patience and are here to help!"}
+                    {"Oops! 😮 We couldn't find any servers where you have 'Manage Guild' or higher permissions. Just logged in? Please give us a moment, then refresh the page. 🔄 If you're still having trouble, try logging in again and we'll update your information. 🔄 Need a hand? 🤔 Don't hesitate to join our support server. 🚀 We're here to help and appreciate your patience! 😊"}
                 </span>
             ) :
-                <div className="w-full grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 max-sm:grid-cols-1 gap-10">
+                <Grid>
                     {guilds.map((guild: Guild) => (
                         <ServerCard key={guild.id} guild={guild} />
                     ))}
-                </div>}
+                </Grid>}
         </>
     );
 }
 
 ServersView.Skeleton = function ServerViewSkeleton() {
     return (
+        <Grid>
+            <ServerCard.Skeleton />
+            <ServerCard.Skeleton />
+            <ServerCard.Skeleton />
+            <ServerCard.Skeleton />
+            <ServerCard.Skeleton />
+            <ServerCard.Skeleton />
+        </Grid>
+    );
+}
+
+function Grid({ children }: { children: React.ReactNode }) {
+    return (
         <div className="w-full grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 max-sm:grid-cols-1 gap-10">
-            <ServerCard.Skeleton />
-            <ServerCard.Skeleton />
-            <ServerCard.Skeleton />
-            <ServerCard.Skeleton />
-            <ServerCard.Skeleton />
-            <ServerCard.Skeleton />
+            {children}
         </div>
     );
 }

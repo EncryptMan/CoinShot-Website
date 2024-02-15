@@ -2,6 +2,7 @@
 
 import { LoadingSpinner } from "@/app/components/LoadingSpinner"
 import { setGuildDataSource } from "@/app/lib/actions"
+import { Card } from "@/components/ui/card"
 import {
     Select,
     SelectContent,
@@ -9,11 +10,12 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import { cn } from "@/lib/utils"
 import { useState } from "react"
 import { toast } from "sonner"
 
 
-export default function DataSourceSetting({ guildId, sources, currentSource }: { guildId: string, sources: string[], currentSource: string }) {
+export default function DataSourceSetting({ guildId, sources, currentSource, className }: { guildId: string, sources: string[], currentSource: string, className?: string}) {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
 
@@ -30,7 +32,7 @@ export default function DataSourceSetting({ guildId, sources, currentSource }: {
     }
 
     return (
-        <div className="rounded-lg flex items-center p-3 justify-between bg-slate-700 px-5">
+        <Card className={cn("w-full flex items-center justify-between py-2 px-4 bg-slate-700", className)}>
             Data Source
             <div>
                 <Select defaultValue={currentSource} onValueChange={onValueChange}>
@@ -52,6 +54,6 @@ export default function DataSourceSetting({ guildId, sources, currentSource }: {
                 </Select>
                 {isError && <span className="text-red-500 text-sm pt-2">Error</span>}
             </div>
-        </div>
+        </Card>
     )
 }
