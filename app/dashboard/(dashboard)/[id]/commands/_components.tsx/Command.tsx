@@ -1,13 +1,22 @@
 'use client'
 
 import { LoadingSpinner } from "@/app/components/LoadingSpinner";
-import {setGuildCommandEnabled} from "@/app/lib/actions";
+import { setGuildCommandEnabled } from "@/app/lib/actions";
 import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
 import { toast } from "sonner";
 
-export default function Command({ name, displayName, description, enabled, guildId }: { name: string, displayName?: string, description: string, enabled: boolean, guildId: string }) {
+export default function Command(
+    { name, displayName, description, enabled, guildId }
+        : {
+            name: string,
+            displayName?: string,
+            description: string,
+            enabled: boolean,
+            guildId: string,
+        }
+) {
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(false)
     const [commandEnabled, setCommandEnabled] = useState(enabled)
@@ -16,18 +25,26 @@ export default function Command({ name, displayName, description, enabled, guild
         setIsLoading(true)
         setError(false)
 
-        setGuildCommandEnabled(guildId, name, state)
-            .then((success) => {
-                if (success) setCommandEnabled(state)
-                setIsLoading(false)
-                setError(!success)
+        try {
 
-                const action = state ? "enable" : "disable"
-                const commandName = displayName ?? name
-                const successMessage = `/${commandName} command ${action}d`
-                const errorMessage = `Failed to ${action} ${commandName} command`
-                toast(success ? successMessage : errorMessage)
-            })
+            // Server action
+            setGuildCommandEnabled(guildId, name, state)
+                .then((success) => {
+                    if (success) setCommandEnabled(state)
+                    setIsLoading(false)
+                    setError(!success)
+
+                    const action = state ? "enable" : "disable"
+                    const commandName = displayName ?? name
+                    const successMessage = `/${commandName} command ${action}d`
+                    const errorMessage = `Failed to ${action} ${commandName} command`
+                    toast(success ? successMessage : errorMessage)
+                })
+        } catch (error) {
+            console.error(error)
+            setIsLoading(false)
+            setError(true)
+        } 
     }
 
     return (

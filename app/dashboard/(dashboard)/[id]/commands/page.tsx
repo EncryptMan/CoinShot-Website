@@ -1,4 +1,4 @@
-import { fetchGuildCommands } from "@/app/lib/actions";
+import { fetchGuildCommands, setGuildCommandEnabled } from "@/app/lib/actions";
 import Command from "./_components.tsx/Command";
 import { Card } from "@/components/ui/card";
 import DashboardPage from "../_components/DashboardPage";
