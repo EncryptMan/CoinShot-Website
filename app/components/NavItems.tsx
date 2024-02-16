@@ -26,6 +26,11 @@ export default function NavItems({ className }: { className?: string}) {
                     Support
                 </Link>
             </Button>
+            <Button asChild variant={'ghost'} className="hover:bg-gray-700/50 text-neutral-400 text-lg hover:text-neutral-200">
+                <Link href="/blog">
+                    Blogs
+                </Link>
+            </Button>
         </div>
     )
 }
