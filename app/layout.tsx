@@ -6,6 +6,7 @@ import SessionProvider from '@/app/components/SessionProvider'
 import { siteConfig } from '@/site.config'
 import { ThemeProvider } from './components/ThemeProvider'
 import authOptions from '@/auth.options'
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -43,6 +44,7 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <Analytics />
           </ThemeProvider>
         </SessionProvider>
       </body>

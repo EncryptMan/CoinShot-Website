@@ -48,7 +48,7 @@ export default function Navbar() {
             <div className="w-full flex justify-between items-center md:max-w-screen-xl mx-auto">
                 
                 <Sheet open={isSidebarOpen} onOpenChange={setSidebarOpen}>
-                    <SheetTrigger className="block lg:hidden" onClick={() => setSidebarOpen(true)}><Button variant={'ghost'}><Menu className="md:hidden block " /></Button></SheetTrigger>
+                    <SheetTrigger className="block lg:hidden" onClick={() => setSidebarOpen(true)} asChild><Button variant={'ghost'}><Menu className="md:hidden block " /></Button></SheetTrigger>
                     <SheetContent side={'left'} className="bg-gray-800" >
                         <NavItems className="flex-col items-start" />
                     </SheetContent>
