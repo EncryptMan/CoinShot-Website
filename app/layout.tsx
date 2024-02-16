@@ -7,6 +7,7 @@ import { siteConfig } from '@/site.config'
 import { ThemeProvider } from './components/ThemeProvider'
 import authOptions from '@/auth.options'
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -45,6 +46,7 @@ export default async function RootLayout({
           >
             {children}
             <Analytics />
+            <SpeedInsights />
           </ThemeProvider>
         </SessionProvider>
       </body>
