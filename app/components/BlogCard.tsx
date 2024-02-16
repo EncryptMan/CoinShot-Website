@@ -6,8 +6,8 @@ export default function BlogCard({ category, title, date, description, image, hr
     return (
         <Card className="w-full p-3 bg-slate-600">
             <Link href={href}>
-                <div className="flex gap-5">
-                    <Image width={200} height={200} src={image} alt={`${title} blog icon`} className="rounded-lg overflow-hidden" />
+                <div className="flex gap-5 max-md:flex-col">
+                    <Image width={200} height={200} src={image} alt={`${title} blog icon`} className="rounded-lg overflow-hidden max-md:mx-auto" />
                     <div className="flex-grow">
                         <span className="capitalize text-blue-400">{category}</span>
                         <div className="flex items-center justify-between">
