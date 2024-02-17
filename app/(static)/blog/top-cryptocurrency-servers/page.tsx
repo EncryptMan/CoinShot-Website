@@ -32,7 +32,8 @@ export const metadata: Metadata = {
         tags: ['Cryptocurrency', 'Discord', 'Crypto', 'Community', 'Server', 'Blockchain', 'Bitcoin', 'Ethereum', 'NFT', 'DeFi', 'Trading', 'Investing', 'Market', 'CoinShot'],
     },
     twitter: {
-        site: '@CoinShotPro',
+        card: 'summary_large_image',
+        site: '@CoinShotBot',
         creator: '@EncryptMan',
         title: 'Top Cryptocurrency Discord Servers to Join in 2024',
         description: 'Discover the top Discord servers driving innovation and insight in the digital finance landscape. Dive into the forefront of cryptocurrency communities in 2024!',
