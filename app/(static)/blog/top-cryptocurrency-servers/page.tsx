@@ -37,14 +37,7 @@ export const metadata: Metadata = {
         creator: '@EncryptMan',
         title: 'Top Cryptocurrency Discord Servers to Join in 2024',
         description: 'Discover the top Discord servers driving innovation and insight in the digital finance landscape. Dive into the forefront of cryptocurrency communities in 2024!',
-        images: [
-            {
-                url: '/blog/banner_preview.png',
-                width: 1200,
-                height: 630,
-                alt: 'Top Cryptocurrency Discord Servers to Join in 2024 Blog Icon',
-            }
-        ],
+        images: '/blog/banner_preview_twitter.png',
     },
 }
 
