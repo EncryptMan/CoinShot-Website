@@ -19,9 +19,9 @@ export const metadata: Metadata = {
         siteName: 'CoinShot',
         images: [
             {
-                url: '/blog/image.png',
-                width: 500,
-                height: 500,
+                url: '/blog/banner_preview.png',
+                width: 1200,
+                height: 630,
                 alt: 'Top Cryptocurrency Discord Servers to Join in 2024 Blog Icon',
             }
         ],
@@ -32,16 +32,15 @@ export const metadata: Metadata = {
         tags: ['Cryptocurrency', 'Discord', 'Crypto', 'Community', 'Server', 'Blockchain', 'Bitcoin', 'Ethereum', 'NFT', 'DeFi', 'Trading', 'Investing', 'Market', 'CoinShot'],
     },
     twitter: {
-        card: 'summary_large_image',
         site: '@CoinShotPro',
         creator: '@EncryptMan',
         title: 'Top Cryptocurrency Discord Servers to Join in 2024',
         description: 'Discover the top Discord servers driving innovation and insight in the digital finance landscape. Dive into the forefront of cryptocurrency communities in 2024!',
         images: [
             {
-                url: '/blog/image.png',
-                width: 500,
-                height: 500,
+                url: '/blog/banner_preview.png',
+                width: 1200,
+                height: 630,
                 alt: 'Top Cryptocurrency Discord Servers to Join in 2024 Blog Icon',
             }
         ],
