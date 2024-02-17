@@ -48,7 +48,7 @@ export default function Navbar() {
             <div className="w-full flex justify-between items-center md:max-w-screen-xl mx-auto">
                 
                 <Sheet open={isSidebarOpen} onOpenChange={setSidebarOpen}>
-                    <SheetTrigger className="block lg:hidden" onClick={() => setSidebarOpen(true)} asChild><Button variant={'ghost'}><Menu className="md:hidden block " /></Button></SheetTrigger>
+                    <SheetTrigger className="block lg:hidden" onClick={() => setSidebarOpen(true)} asChild><Button variant={'ghost'}><Menu className="lg:hidden block " /></Button></SheetTrigger>
                     <SheetContent side={'left'} className="bg-gray-800" >
                         <NavItems className="flex-col items-start" />
                     </SheetContent>
@@ -59,7 +59,7 @@ export default function Navbar() {
                         <Image className="rounded-full overflow-hidden" height={40} width={40} src="/icon.png" alt="CoinShot icon" />
                         <span className={cn("text-3xl", anton.className)}>CoinShot</span>
                     </Link>
-                <NavItems className="max-md:hidden" />
+                <NavItems className="max-lg:hidden" />
                 </div>
                 <AuthButton />
             </div>

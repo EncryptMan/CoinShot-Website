@@ -12,12 +12,40 @@ export const metadata: Metadata = {
     authors: [{ name: 'EncryptMan' }],
     creator: 'EncryptMan',
     publisher: 'EncryptMan',
-    icons: [
-        {
-            url: '/blog/image.png',
-            href: '/blog/image.png',
-        }
-    ]
+    metadataBase: new URL('https://coinshot.pro'),
+    openGraph: {
+        title: 'Top Cryptocurrency Discord Servers to Join in 2024',
+        description: 'Discover the top Discord servers driving innovation and insight in the digital finance landscape. Dive into the forefront of cryptocurrency communities in 2024!',
+        siteName: 'CoinShot',
+        images: [
+            {
+                url: '/blog/image.png',
+                width: 500,
+                height: 500,
+                alt: 'Top Cryptocurrency Discord Servers to Join in 2024 Blog Icon',
+            }
+        ],
+        type: 'article',
+        publishedTime: '2024-02-16T00:00:00Z',
+        authors: ['EncryptMan'],
+        section: 'Cryptocurrency',
+        tags: ['Cryptocurrency', 'Discord', 'Crypto', 'Community', 'Server', 'Blockchain', 'Bitcoin', 'Ethereum', 'NFT', 'DeFi', 'Trading', 'Investing', 'Market', 'CoinShot'],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        site: '@CoinShotPro',
+        creator: '@EncryptMan',
+        title: 'Top Cryptocurrency Discord Servers to Join in 2024',
+        description: 'Discover the top Discord servers driving innovation and insight in the digital finance landscape. Dive into the forefront of cryptocurrency communities in 2024!',
+        images: [
+            {
+                url: '/blog/image.png',
+                width: 500,
+                height: 500,
+                alt: 'Top Cryptocurrency Discord Servers to Join in 2024 Blog Icon',
+            }
+        ],
+    },
 }
 
 const anton = Anton({
@@ -36,7 +64,7 @@ export default function Page() {
         <main className="w-full max-w-5xl pt-10 max-sm:pt-5 px-5 mx-auto flex-grow">
             <article className="text-neutral-300">
                 <Image src={'/blog/banner.png'} width={1000} height={300} alt="Banner" className="rounded-xl overflow-hidden" />
-                <h1 className={cn('text-3xl max-md:text-2xl mt-5 text-white', anton.className)}>Top Cryptocurrency Discord Servers to Join in 2024: Your Gateway to the Future of Crypto Communities 📈</h1>
+                <h1 className={cn('text-3xl mt-5 text-white', anton.className)}>Top Cryptocurrency Discord Servers to Join in 2024: Your Gateway to the Future of Crypto Communities 📈</h1>
                 <p className="text-neutral-300">{"EncryptMan • 16 Feb"}</p>
                 <div className="mt-5">
                     <h2 className={cn('text-2xl mt-5 text-white', anton.className)}>1. CoinShot 🚀</h2>
