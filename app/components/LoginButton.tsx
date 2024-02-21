@@ -4,7 +4,7 @@ import DiscordLogo from "./DiscordLogo";
 import { Button } from "@/components/ui/button";
 
 
-export default async function LoginButton() {
+export default function LoginButton() {
 
     return (
         <Button onClick={() => signIn('discord')} className="text-white flex gap-1 py-6 px-6">

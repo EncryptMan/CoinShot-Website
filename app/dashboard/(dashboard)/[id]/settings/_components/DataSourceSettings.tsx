@@ -11,13 +11,16 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { cn } from "@/lib/utils"
+import { DataSource } from "@prisma/client"
 import { useState } from "react"
 import { toast } from "sonner"
 
 
-export default function DataSourceSetting({ guildId, sources, currentSource, className }: { guildId: string, sources: string[], currentSource: string, className?: string}) {
+export default function DataSourceSetting({ guildId, currentSource, className }: { guildId: string, currentSource: string, className?: string}) {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
+
+    const sources: string[] = Object.values(DataSource);
 
     function onValueChange(value: string) {
         setIsError(false)

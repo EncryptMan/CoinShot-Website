@@ -5,7 +5,7 @@ import { prisma } from "@/utils/db";
 import { revalidatePath } from "next/cache";
 import authOptions from "@/auth.options";
 import axios from "axios";
-import { Guild } from "@prisma/client";
+import { DataSource, Guild } from "@prisma/client";
 
 
 export async function fetchGuilds() {
@@ -274,12 +274,18 @@ export async function setGuildDataSource(guildId: string, source: string) {
   try {
     authorizeUser(guildId);
 
+    let enumValue: DataSource = DataSource[source as keyof typeof DataSource];
+
+    if (enumValue === undefined) {
+      throw new Error(`Invalid source: ${source}`);
+    }
+    
     await prisma.guildSettings.update({
       where: {
         id: guildId,
       },
       data: {
-        dataSource: source,
+        dataSource: enumValue,
       },
     });
 

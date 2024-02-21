@@ -70,7 +70,14 @@ model GuildSettings {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  dataSource String @default("All Exchanges")
+  dataSource DataSource @default(All_Exchanges)
+}
+
+enum DataSource {
+  All_Exchanges
+  Binance
+  Bitget
+  OKX
 }
 
 model GuildCommands {
