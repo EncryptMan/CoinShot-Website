@@ -6,8 +6,9 @@ import { setGuildAutomationChannel, setGuildAutomationEnabled } from "@/app/lib/
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
+import { useToast } from "@/components/ui/use-toast";
+import { cn } from "@/lib/utils";
 import { useContext, useState } from "react";
-import { toast } from "sonner";
 
 
 export default function Automation({ name, displayName, description, enabled, channels, currentChannelId }: { name: string, displayName?: string, description: string, enabled: boolean, channels: { id: string, name: string }[], currentChannelId: string | null }) {
@@ -19,7 +20,9 @@ export default function Automation({ name, displayName, description, enabled, ch
 
     const [selectedChannelId, setSelectedChannelId] = useState(currentChannelId ?? '')
     const [isChannelLoading, setIsChannelLoading] = useState(false)
-    const [isChannelError, setIsChannelError] = useState(false)
+    const [channelError, setChannelError] = useState(null as string | null)
+
+    const { toast } = useToast()
 
 
     function toggle(state: boolean) {
@@ -34,10 +37,12 @@ export default function Automation({ name, displayName, description, enabled, ch
 
                 if (success) {
                     setAutomationEnabled(state)
-                    toast(`${displayName} automation successfully ${action}d`)
+                    // toast(`${displayName} automation successfully ${action}d`)
+                    toast({ title: "Success", description: `${displayName} automation successfully ${action}d`, variant: "success" })
                 } else {
                     setIsStateError(true)
-                    toast(`Failed to ${action} ${displayName} automation`)
+                    // toast(`Failed to ${action} ${displayName} automation`)
+                    toast({ title: "Error", description: `Failed to ${action} ${displayName} automation`, variant: "error" })
                 }
             })
 
@@ -45,19 +50,20 @@ export default function Automation({ name, displayName, description, enabled, ch
 
     function onChannelChange(newChannelId: string) {
         setIsChannelLoading(true)
-        setIsChannelError(false)
+        setChannelError(null)
 
         setGuildAutomationChannel(guildId, name, newChannelId)
-            .then((success) => {
+            .then(({ error }) => {
                 setIsChannelLoading(false)
 
-                if (success) {
-                    setSelectedChannelId(newChannelId)
-                    toast(`${displayName} automation channel successfully updated`)
+                if (error) {
+                    setChannelError(error)
+                    toast({ title: "Error", description: error, variant: "error" })
                 } else {
-                    setIsChannelError(true)
-                    toast(`Failed to update ${displayName} automation channel`)
+                    toast({ title: "Success", description: `${displayName} automation channel successfully updated`, variant: "success" })
                 }
+
+                setSelectedChannelId(newChannelId)
             })
     }
 
@@ -76,8 +82,8 @@ export default function Automation({ name, displayName, description, enabled, ch
                     {isStateError && <span className="text-red-500 text-sm mt-2">Error</span>}
                 </div>
             </div>
-            <p className="mt-4">Channel</p>
-            <Select value={selectedChannelId} onValueChange={onChannelChange}>
+            <p className={cn("mt-4 text-neutral-400", automationEnabled && 'text-white')}>Channel</p>
+            <Select value={selectedChannelId} onValueChange={onChannelChange} disabled={!automationEnabled}>
                 <SelectTrigger className="w-full">
                     {
                         isChannelLoading
@@ -94,7 +100,7 @@ export default function Automation({ name, displayName, description, enabled, ch
                     }
                 </SelectContent>
             </Select>
-            {isChannelError && <p className="text-sm text-red-500">Failed to update channel</p>}
+            {channelError && <p className="text-sm text-red-500">{channelError}</p>}
         </Card>
     );
 }

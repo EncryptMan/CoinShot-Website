@@ -4,8 +4,8 @@ import { LoadingSpinner } from "@/app/components/LoadingSpinner";
 import { setGuildCommandEnabled } from "@/app/lib/actions";
 import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
+import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
-import { toast } from "sonner";
 
 export default function Command(
     { name, displayName, description, enabled, guildId }
@@ -20,6 +20,7 @@ export default function Command(
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(false)
     const [commandEnabled, setCommandEnabled] = useState(enabled)
+    const { toast } = useToast()
 
     function toggle(state: boolean) {
         setIsLoading(true)
@@ -38,7 +39,8 @@ export default function Command(
                     const commandName = displayName ?? name
                     const successMessage = `/${commandName} command ${action}d`
                     const errorMessage = `Failed to ${action} ${commandName} command`
-                    toast(success ? successMessage : errorMessage)
+                    // toast(success ? successMessage : errorMessage)
+                    toast({ title: success ? "Success" : "Error", description: success ? successMessage : errorMessage, variant: success ? "success" : "error" })
                 })
         } catch (error) {
             console.error(error)
@@ -53,7 +55,7 @@ export default function Command(
                 <p className="text-lg font-bold text-neutral-200">/{displayName ?? name}</p>
                 <p className="text-sm text-neutral-400">{description}</p>
             </div>
-            <div className="w-10 flex justify-center">
+            <div className="w-10 flex justify-center flex-col">
                 {isLoading ?
                     <LoadingSpinner /> :
                     <Switch defaultChecked={enabled} checked={commandEnabled} onCheckedChange={toggle} className="data-[state=unchecked]:bg-gray-900" />

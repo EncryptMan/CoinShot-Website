@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import { prisma } from "@/utils/db";
 import { revalidatePath } from "next/cache";
 import authOptions from "@/auth.options";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { DataSource, Guild } from "@prisma/client";
 
 
@@ -204,7 +204,9 @@ export async function fetchGuildChannels(guildId: string) {
       }
     })
 
-    if(!guildUser?.guild.botPresent) return [];
+    if (!guildUser) return { error: 'You do not have access to this server 😅' }
+
+    if (!guildUser.guild.botPresent) return { error: 'Bot is not present in this server 😅' };
 
     const response = await axios.get(`https://discord.com/api/guilds/${guildId}/channels`, {
       headers: {
@@ -214,19 +216,29 @@ export async function fetchGuildChannels(guildId: string) {
 
     const guildChannels = response.data;
 
-    const simplifiedGuildChannels = guildChannels.map((channel: any) => ({
-      id: channel.id,
-      name: channel.name,
-    })) as { id: string, name: string }[];
+    const simplifiedGuildChannels = guildChannels
+      .filter((channel: any) => ![2, 4, 13, 14, 15, 16].includes(channel.type))
+      .map((channel: any) => ({
+        id: channel.id,
+        name: channel.name,
+      })) as { id: string, name: string }[];
 
     console.log('Guild channels fetched from Discord API');
 
     return simplifiedGuildChannels;
   } catch (error) {
+
+    const axiosError = error as AxiosError;
+
+    // 429 Too Many Requests
+    if (axiosError.response && axiosError.response.status === 429) {
+      return { error: 'You are being rate limited due to too many requests. Please wait and try again later 😟' };
+    }
+
     console.error(error);
   }
 
-  return [];
+  return { error: 'Something went wrong while fetching server channels 😟' };
 }
 
 export async function fetchGuildDashboardLogs(guildId: string) {
@@ -245,8 +257,8 @@ export async function fetchGuildDashboardLogs(guildId: string) {
       }
     })
 
-    if(!guildUser?.guild.botPresent) return [];
-    
+    if (!guildUser?.guild.botPresent) return [];
+
     const guildDashboardLogs = await prisma.dashboardLog.findMany({
       where: {
         guildId: guildId,
@@ -272,14 +284,14 @@ export async function fetchGuildDashboardLogs(guildId: string) {
 
 export async function setGuildDataSource(guildId: string, source: string) {
   try {
-    authorizeUser(guildId);
+    await authorizeUser(guildId);
 
     let enumValue: DataSource = DataSource[source as keyof typeof DataSource];
 
     if (enumValue === undefined) {
       throw new Error(`Invalid source: ${source}`);
     }
-    
+
     await prisma.guildSettings.update({
       where: {
         id: guildId,
@@ -302,7 +314,7 @@ export async function setGuildDataSource(guildId: string, source: string) {
 
 export async function setGuildCommandEnabled(guildId: string, command: string, enabled: boolean) {
   try {
-    authorizeUser(guildId);
+    await authorizeUser(guildId);
 
     await prisma.guildCommands.update({
       where: {
@@ -328,7 +340,7 @@ export async function setGuildCommandEnabled(guildId: string, command: string, e
 
 export async function setGuildAutomationEnabled(guildId: string, automation: string, enabled: boolean) {
   try {
-    authorizeUser(guildId);
+    await authorizeUser(guildId);
 
     await prisma.guildAutomations.update({
       where: {
@@ -353,9 +365,58 @@ export async function setGuildAutomationEnabled(guildId: string, automation: str
 }
 
 export async function setGuildAutomationChannel(guildId: string, automation: string, channelId: string) {
-  try {
-    authorizeUser(guildId);
+  const { error: authError } = await authorizeUserSafe(guildId);
+  if (authError) return { error: authError }
 
+  try {
+    await axios.post(`https://discord.com/api/channels/${channelId}/messages`, {
+      content: `${camelToTitle(automation)} automation enabled in this channel ✅`,
+
+    }, {
+      headers: {
+        Authorization: `Bot ${process.env.DISCORD_BOT_TOKEN}`,
+      },
+    });
+
+
+  } catch (error) {
+    const axiosError = error as AxiosError;
+
+    interface DiscordErrorData {
+      message?: string;
+      code?: number;
+    }
+
+    const discordErrorData = axiosError.response?.data as DiscordErrorData;
+
+    console.error(discordErrorData);
+
+    // Check if the error is a Discord error with a specific code
+    if (discordErrorData && discordErrorData.code === 50008) {
+      return { error: 'This is not a text channel' };
+    }
+
+    // 403 Forbidden
+    if (axiosError.response && axiosError.response.status === 403) {
+      return { error: 'Bot does not have permission to send messages in this channel' };
+    }
+
+    // 429 Too Many Requests
+    if (axiosError.response && axiosError.response.status === 429) {
+      return { error: 'You are being rate limited due to too many requests' };
+    }
+
+    // 404 Not Found
+    if (axiosError.response && axiosError.response.status === 404) {
+      return { error: 'This channel was not found' };
+    }
+
+    console.error(axiosError);
+
+    return { error: 'Something went wrong!' };
+  }
+
+  try {
     await prisma.guildAutomations.update({
       where: {
         id: guildId,
@@ -364,17 +425,16 @@ export async function setGuildAutomationChannel(guildId: string, automation: str
         [`${automation}ChannelId`]: channelId,
       },
     });
-
-    const automationName = automation.replace(/([A-Z])/g, ' $1').replace(/^./, function (str) { return str.toUpperCase(); })
-    const logMessage = `${automationName} automation channel updated`;
-    await logDashboardActivity(guildId, logMessage);
-
-    return true;
   } catch (error) {
     console.error(error);
+    return { error: 'Failed to update automation channel' }
   }
 
-  return false;
+  const automationName = automation.replace(/([A-Z])/g, ' $1').replace(/^./, function (str) { return str.toUpperCase(); })
+  const logMessage = `${automationName} automation channel updated`;
+  await logDashboardActivity(guildId, logMessage);
+
+  return {}
 }
 
 export async function logDashboardActivity(guildId: string, message: string) {
@@ -401,12 +461,36 @@ export async function logDashboardActivity(guildId: string, message: string) {
 
 async function authorizeUser(guildId: string) {
   const session = await getServerSession(authOptions);
-    const guildUserCount = await prisma.guildUser.count({
-      where: {
-        userId: session?.user?.id,
-        guildId,
-      },
-    });
+  const guildUserCount = await prisma.guildUser.count({
+    where: {
+      userId: session?.user?.id,
+      guildId,
+    },
+  });
 
-    if (guildUserCount === 0) throw new Error('User is not authorized to perform this action');
+  if (guildUserCount === 0) throw new Error('You must be signed in to perform this action');
+}
+
+async function authorizeUserSafe(guildId: string) {
+  const session = await getServerSession(authOptions);
+  if (!session?.user) return { error: 'You must be signed in to perform this action' }
+
+  const guildUserCount = await prisma.guildUser.count({
+    where: {
+      userId: session?.user?.id,
+      guildId,
+    },
+  });
+
+  if (guildUserCount === 0) return { error: 'You dont have access to this server' }
+
+  return {}
+}
+
+function camelToTitle(camelCase: string) {
+  // Insert a space before all caps
+  let result = camelCase.replace(/([A-Z])/g, ' $1');
+
+  // Uppercase the first character
+  return result.charAt(0).toUpperCase() + result.slice(1);
 }

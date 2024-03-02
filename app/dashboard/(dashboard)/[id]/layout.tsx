@@ -1,6 +1,6 @@
 import Sidebar from "./_components/Sidebar";
 import Navbar from './_components/Navbar';
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster } from "@/components/ui/toaster"
 import ActiveIdProvider from "./_components/ActiveIdProvider";
 
 

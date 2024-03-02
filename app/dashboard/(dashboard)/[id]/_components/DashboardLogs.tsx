@@ -47,8 +47,8 @@ export default async function DashboardLogs({ guildId, className }: { guildId: s
     )
 }
 
-DashboardLogs.Skeleton = function DashboardLogsSkeleton() {
+DashboardLogs.Skeleton = function DashboardLogsSkeleton({ className }: { className?: string}) {
     return (
-        <Skeleton className="flex-grow w-full" />
+        <Skeleton className={cn("flex-grow w-full", className)} />
     )
 }

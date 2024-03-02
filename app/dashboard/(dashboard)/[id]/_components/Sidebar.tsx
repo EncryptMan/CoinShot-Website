@@ -6,7 +6,7 @@ import ServerSwitcher from "./ServerSwitcher"
 import NavItem from "./NavItem"
 import { useContext } from "react"
 import { ActiveIdContext } from "./ActiveIdProvider"
-import { ChevronRightSquare, Home, Bolt, Repeat2 } from "lucide-react"
+import { ChevronRightSquare, Home, Bolt, Repeat2, TrendingUp } from "lucide-react"
 
 export default function Sidebar({ className }: { className?: string }) {
     const activeId = useContext<string>(ActiveIdContext);

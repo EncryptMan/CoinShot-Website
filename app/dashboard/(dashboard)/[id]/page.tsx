@@ -18,7 +18,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     return (
         <DashboardPage>
             <ServerProfile guild={guild} />
-            <Suspense fallback={<DashboardLogs.Skeleton />}>
+            <Suspense fallback={<DashboardLogs.Skeleton className="mt-3" />}>
                 <DashboardLogs guildId={id} className="mt-3" />
             </Suspense>
         </DashboardPage>

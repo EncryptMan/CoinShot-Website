@@ -10,15 +10,16 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import { useToast } from "@/components/ui/use-toast"
 import { cn } from "@/lib/utils"
 import { DataSource } from "@prisma/client"
 import { useState } from "react"
-import { toast } from "sonner"
 
 
 export default function DataSourceSetting({ guildId, currentSource, className }: { guildId: string, currentSource: string, className?: string}) {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
+    const { toast } = useToast()
 
     const sources: string[] = Object.values(DataSource);
 
@@ -30,7 +31,8 @@ export default function DataSourceSetting({ guildId, currentSource, className }:
             .then((success) => {
                 setIsLoading(false)
                 setIsError(!success)
-                toast(success ? `Data source updated to ${value}` : "Failed to update data source")
+                // toast(success ? `Data source updated to ${value}` : "Failed to update data source")
+                toast({ title: success ? "Success" : "Error", description: success ? `Data source updated to ${value}` : "Failed to update data source", variant: success ? "success" : "error" })
             })
     }
 
