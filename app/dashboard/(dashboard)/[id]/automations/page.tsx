@@ -11,7 +11,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     return (
         <DashboardPage>
             <h1 className="text-2xl font-semibold w-full">Automations</h1>
-            <h2 className="text-lg text-neutral-400 w-full">Make sure Bot has the <span className="font-semibold">"Send Message"</span> permission in the selected channels. Otherwise, the automations will not work.</h2>
+            <h2 className="text-lg text-neutral-400 w-full">Make sure Bot has the <span className="font-semibold">{'"Send Message"'}</span> permission in the selected channels. Otherwise, the automations will not work.</h2>
             {guildAutomations === null ? "Oops! 😕 We're unable to load the automations right now. Could you please refresh the page? 🔄" :
                 Array.isArray(guildChannels) ? <Card className="flex flex-col gap-3 mt-5 p-3 bg-gray-900 w-full">
                     <Automation
