@@ -44,7 +44,7 @@ export default function ServerCard({ guild }: { guild: Guild }) {
                     </Button>
                     :
                     <Button className="bg-white/10 hover:bg-white/30" asChild>
-                        <Link href={`https://discord.com/oauth2/authorize?client_id=1159433416459157535&permissions=0&scope=bot%20applications.commands&guild_id=${guild.id}`}>
+                        <Link href={`${process.env.BOT_INVITE_URL}&guild_id=${guild.id}`}>
                             <span className="text-white">Setup</span>
                         </Link>
                     </Button>

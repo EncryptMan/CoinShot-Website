@@ -32,7 +32,7 @@ export default function Home() {
             <p className={cn("text-xl max-sm:text-lg text-neutral-400", verala.className)}>Stay up to date with crypto market with instant access to real-time market data.</p>
             <div className="flex items-center justify-start gap-5 text-xl max-sm:text-base">
               <Button className='h-14 text-white' size={'lg'} asChild>
-                <Link href="https://discord.com/api/oauth2/authorize?client_id=1159433416459157535&permissions=0&scope=bot%20applications.commands" aria-current="page">
+                <Link href={process.env.BOT_INVITE_URL ?? ''} aria-current="page">
                   <div className='flex items-center justify-between gap-2 text-lg w-full h-full'>
                     <DiscordLogo className='w-10 h-10' />
                     Add To Discord
@@ -72,7 +72,7 @@ export default function Home() {
         <h2 className={cn('text-center text-5xl text-neutral-200 mt-5', anton.className)}>Need Help?</h2>
         <p className='text-neutral-300'>Join our support server to get support or request a new feature</p>
         <Button variant={'default'} className='bg-neutral-200 hover:bg-neutral-400' asChild size={'lg'}>
-          <Link href="https://discord.gg/kEQXHqXytn" aria-current="page">
+          <Link href={process.env.SUPPORT_SERVER_URL ?? ''} aria-current="page">
             <DiscordLogo className='h-5 w-5 mr-2' />
             Join Support Server
           </Link>
