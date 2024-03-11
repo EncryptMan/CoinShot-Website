@@ -13,7 +13,10 @@ export default async function Layout({
             <footer className='mt-5 border-t border-slate-600 flex justify-between p-2 px-5 text-neutral-400'>
                 <p>© 2023 CoinShot</p>
                 <a href="http://www.freepik.com" className="hidden"></a>
-                <Link href='/terms'>Terms of Service</Link>
+                <div className="flex gap-3 max-sm:gap-1">
+                    <Link href='/privacy'>Privacy Policy</Link>
+                    <Link href='/terms'>Terms of Service</Link>
+                </div>
             </footer>
         </main>
     )
