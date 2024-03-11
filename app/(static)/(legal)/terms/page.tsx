@@ -8,6 +8,7 @@ export default function Page() {
                 <h1 className={cn("text-5xl font-semibold  text-neutral-200 w-full capitalize", anton.className)}>{"COINSHOT'S TERMS OF SERVICE"}</h1>
                 <p className="pt-2">Effective: March 11, 2024</p>
                 <p className="">Last Updated: March 11, 2024</p>
+                <p className="">Author: EncryptMan</p>
                 <ul className="pt-3 gap-6 flex flex-col">
                     <li>
                         <h2 className="text-xl text-neutral-200 font-semibold pb-2">1. Introduction</h2>
@@ -19,7 +20,7 @@ export default function Page() {
                         {'First and foremost, you are accountable for all activity that happens on your Discord server while the bot is running. It\'s important to use the bot for legitimate purposes only, complying with both '}<Link href='https://discord.com/terms' target="_blank" className="text-blue-400">{'Discord\'s Terms of Service'}</Link>{' and legal regulations.'}
                         <br />
                         <br />
-                        {'When it comes to data security, your privacy is important. You should refrain from sharing any sensitive financial information through the bot. This includes, but is not limited to, critical details like credit card numbers, bank account information, social security numbers, or the all-important seed phrases used to access your cryptocurrency wallets.'}
+                        {'When it comes to data security, your privacy is important. You should refrain from sharing any sensitive financial information to the bot or anywhere in Discord. This includes, but is not limited to, critical details like credit card numbers, bank account information, social security numbers, or the all-important seed phrases used to access your cryptocurrency wallets.'}
                     </li>
                     <li>
                     <h2 className="text-xl text-neutral-200 font-semibold pb-2">3. Data and Privacy</h2>
@@ -37,6 +38,9 @@ export default function Page() {
                         <br />
                         <br />
                         {'The information provided by the Bot is for informational purposes only and should not be considered financial advice. I am not responsible for any investment decisions you make based on the Bot\'s data and will not be liable for any losses you may incur. Cryptocurrency investments are inherently risky and you should always do your own research before making any investment decisions.'}
+                        <br />
+                        <br />
+                        {'The CoinShot bot will never directly ask anyone for money, including but not limited to, through direct messages (DMs). Additionally, I am not responsible for any impersonations of the CoinShot bot attempting to scam users. If you encounter such attempts, please report them to Discord immediately.'}
                     </li>
                     <li>
                     <h2 className="text-xl text-neutral-200 font-semibold pb-2">5. Limitation of Liability</h2>
@@ -45,6 +49,9 @@ export default function Page() {
                     <li>
                     <h2 className="text-xl text-neutral-200 font-semibold pb-2">6. Termination</h2>
                         {'Your access to the Bot may be terminated at any time, without cause or notice, which may result in the forfeiture and destruction of all information associated with your account. This may be done because of a violation of these TOS, or any other reason.'}
+                        <br />
+                        <br />
+                        {'I reserve the right to modify or discontinue, temporarily or permanently, the Bot (or any part of it) with or without notice. I will not be liable to you or to any third party for any modification, suspension, or discontinuance of the Bot.'}
                     </li>
                     <li>
                     <h2 className="text-xl text-neutral-200 font-semibold pb-2">7. Governing Law</h2>
@@ -62,7 +69,7 @@ export default function Page() {
 
                     <h2 className="text-xl text-neutral-200 font-semibold pb-2">10. Contact</h2>
                         {'If you have any questions about these TOS, please contact me at '}<Link href='mailto:swing_stitch.0c@icloud.com' className="text-blue-400">{'swing_stitch.0c@icloud.com'}</Link>
-                        {' or join '}<Link href={process.env.SUPPORT_SERVER_URL ?? ''} className="text-blue-400" target="_blank">{'CoinShot\'s Support Server'}</Link>{'.'}
+                        {' or join '}<Link href={process.env.SUPPORT_SERVER_URL ?? ''} className="text-blue-400" target="_blank">{'CoinShot\'s Support Server'}</Link>{' on Discord.'}
                     </li>
                 </ul>
         </main>
