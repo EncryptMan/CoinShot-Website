@@ -23,7 +23,7 @@ export default function Page() {
                     </li>
                     <li>
                     <h2 className="text-xl text-neutral-200 font-semibold pb-2">3. Data and Privacy</h2>
-                        {'I respect your privacy and are committed to protecting your information. The CoinShot Discord bot collects and stores some data to function effectively. This data includes cryptocurrency information you request (e.g., prices, charts) and server identifiers to link the Bot\'s activity to your specific server. This is done to prevent abuse and ensure the Bot operates as intended.'}
+                        {'I respect your privacy and am committed to protecting your information. The CoinShot Discord bot collects and stores some data to function effectively. This data includes cryptocurrency information you request (e.g., prices, charts) and server identifiers to link the Bot\'s activity to your specific server. This is done to prevent abuse and ensure the Bot operates as intended.'}
                         <br />
                         <br />
                         {'For users with access to CoinShot\'s Dashboard (if applicable):  only basic user information is collected to provide those features. This include your Discord username, profile picture (if available), and a list of your servers. Additionally, information about your permissions within those servers to manage Dashboard access effectively is stored.'}
