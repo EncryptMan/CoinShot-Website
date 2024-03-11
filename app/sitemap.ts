@@ -31,6 +31,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: new Date('2024-03-11'), // '2022-02-16T00:00:00Z'
         changeFrequency: 'monthly',
         priority: 0.2,
+    },
+    {
+        url: 'https://coinshot.pro/privacy',
+        lastModified: new Date('2024-03-11'), // '2022-02-16T00:00:00Z'
+        changeFrequency: 'monthly',
+        priority: 0.2,
     }
   ]
 }
