@@ -16,11 +16,11 @@ export default function NavItems({ className }: { className?: string}) {
                     Features
                 </Link>
             </Button>
-            <Button asChild variant={'ghost'} className="hover:bg-gray-700/50 text-neutral-400 text-lg hover:text-neutral-200">
+            {/* <Button asChild variant={'ghost'} className="hover:bg-gray-700/50 text-neutral-400 text-lg hover:text-neutral-200">
                 <Link href="/#pricing">
                     Pricing
                 </Link>
-            </Button>
+            </Button> */}
             <Button asChild variant={'ghost'} className="hover:bg-gray-700/50 text-neutral-400 text-lg hover:text-neutral-200">
                 <Link href="/#support">
                     Support

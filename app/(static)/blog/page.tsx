@@ -1,22 +1,9 @@
 // Blogs home page
 
 import BlogCard from "@/app/components/BlogCard"
-import DiscordLogo from "@/app/components/DiscordLogo"
-import { Button } from "@/components/ui/button"
+import { anton } from "@/app/lib/fonts"
 import { cn } from "@/lib/utils"
-import { Link } from "lucide-react"
-import { Anton, Varela_Round } from "next/font/google"
-import Image from "next/image"
 
-const anton = Anton({
-    subsets: ['latin', 'latin-ext'],
-    weight: ['400', '400'],
-})
-
-const verala = Varela_Round({
-    subsets: ['latin', 'latin-ext'],
-    weight: ['400'],
-})
 
 export default function Page() {
     return (

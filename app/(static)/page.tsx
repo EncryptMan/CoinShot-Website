@@ -63,9 +63,9 @@ export default function Home() {
             </div>
           </div>
       </section>
-      <section id='pricing'>
+      {/* <section id='pricing'>
         <PricingSection />
-      </section>
+      </section> */}
 
       <section className={cn('w-full p-5', verala.className)} id='support'>
         <div className='flex flex-col items-center justify-center gap-5 rounded-lg bg-slate-600 p-8 '>
