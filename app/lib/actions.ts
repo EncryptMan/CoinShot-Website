@@ -437,6 +437,33 @@ export async function setGuildAutomationChannel(guildId: string, automation: str
   return {}
 }
 
+export async function setGuildAutomationTime(guildId: string, automation: string, time: number) {
+  try {
+    await authorizeUser(guildId);
+
+    // Validate time
+    if (time < 0 || time > 23) return { error: 'Invalid hour' }
+
+    await prisma.guildAutomations.update({
+      where: {
+        id: guildId,
+      },
+      data: {
+        [`${automation}Time`]: time,
+      },
+    });
+
+    const automationName = automation.replace(/([A-Z])/g, ' $1').replace(/^./, function (str) { return str.toUpperCase(); })
+    const logMessage = `${automationName} automation time updated`;
+    await logDashboardActivity(guildId, logMessage);
+
+    return {}
+  } catch (error) {
+    console.error(error);
+    return { error: 'Failed to update automation time' }
+  }
+}
+
 export async function logDashboardActivity(guildId: string, message: string) {
   try {
     const session = await getServerSession(authOptions);

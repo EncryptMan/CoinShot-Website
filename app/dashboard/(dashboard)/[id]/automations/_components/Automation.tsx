@@ -2,7 +2,7 @@
 
 import { LoadingSpinner } from "@/app/components/LoadingSpinner";
 import { ActiveIdContext } from "@/app/dashboard/(dashboard)/[id]/_components/ActiveIdProvider";
-import { setGuildAutomationChannel, setGuildAutomationEnabled } from "@/app/lib/actions";
+import { setGuildAutomationChannel, setGuildAutomationEnabled, setGuildAutomationTime } from "@/app/lib/actions";
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 import { useContext, useState } from "react";
 
 
-export default function Automation({ name, displayName, description, enabled, channels, currentChannelId }: { name: string, displayName?: string, description: string, enabled: boolean, channels: { id: string, name: string }[], currentChannelId: string | null }) {
+export default function Automation({ name, displayName, description, enabled, channels, currentChannelId, time }: { name: string, displayName?: string, description: string, enabled: boolean, channels: { id: string, name: string }[], currentChannelId: string | null, time: number}) {
     const guildId = useContext(ActiveIdContext)
 
     const [automationEnabled, setAutomationEnabled] = useState(enabled)
@@ -21,6 +21,10 @@ export default function Automation({ name, displayName, description, enabled, ch
     const [selectedChannelId, setSelectedChannelId] = useState(currentChannelId ?? '')
     const [isChannelLoading, setIsChannelLoading] = useState(false)
     const [channelError, setChannelError] = useState(null as string | null)
+
+    const [selectedTime, setSelectedTime] = useState(time)
+    const [isTimeLoading, setIsTimeLoading] = useState(false)
+    const [timeError, setTimeError] = useState(null as string | null)
 
     const { toast } = useToast()
 
@@ -67,6 +71,28 @@ export default function Automation({ name, displayName, description, enabled, ch
             })
     }
 
+    function onTimeChange(stringTime: string) {
+        const newTime = parseInt(stringTime)
+        
+        setIsTimeLoading(true)
+        setTimeError(null)
+
+        setGuildAutomationTime(guildId, name, newTime)
+            .then(({ error }) => {
+                setIsTimeLoading(false)
+
+                if (error) {
+                    setTimeError(error)
+                    toast({ title: "Error", description: error, variant: "error" })
+                } else {
+                    toast({ title: "Success", description: `${displayName} automation time successfully updated`, variant: "success" })
+                }
+
+                setSelectedTime(newTime)
+            })
+    }
+
+
     return (
         <Card className="w-full py-2 px-4 bg-gray-700">
             <div className="flex justify-between items-center">
@@ -101,6 +127,29 @@ export default function Automation({ name, displayName, description, enabled, ch
                 </SelectContent>
             </Select>
             {channelError && <p className="text-sm text-red-500">{channelError}</p>}
+            <p className={cn("mt-4 text-neutral-400", automationEnabled && 'text-white')}>{"Time (UTC)"}</p>
+            <Select value={selectedTime.toString()} onValueChange={onTimeChange} disabled={!automationEnabled}>
+                <SelectTrigger className="w-full">
+                    {
+                        isTimeLoading
+                            ? <LoadingSpinner />
+                            : <SelectValue placeholder="00:00" />
+                    }
+                </SelectTrigger>
+                <SelectContent>
+                    {Array.from({length: 24}, (_, i) => i).map((time) => (
+                        <SelectItem key={time} value={time.toString()}>
+                            {/* <span>{time}:00</span> */}
+                            {time < 10 ?
+                                <span>0{time}:00</span> :
+                                <span>{time}:00</span>
+                            }
+                        </SelectItem>
+                    ))
+                    }
+                </SelectContent>
+            </Select>
+            {timeError && <p className="text-sm text-red-500">{timeError}</p>}
         </Card>
     );
 }

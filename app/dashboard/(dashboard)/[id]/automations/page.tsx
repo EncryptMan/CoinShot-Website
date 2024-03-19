@@ -21,6 +21,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                         enabled={guildAutomations.heatmap}
                         currentChannelId={guildAutomations.heatmapChannelId}
                         channels={guildChannels}
+                        time={guildAutomations.heatmapTime}
                     />
                     <Automation
                         displayName="Fear and Greed Index"
@@ -29,6 +30,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                         enabled={guildAutomations.fearGreedIndex}
                         currentChannelId={guildAutomations.fearGreedIndexChannelId}
                         channels={guildChannels}
+                        time={guildAutomations.fearGreedIndexTime}
                     />
                     <Automation
                         displayName="Bitcoin Halving Countdown"
@@ -37,6 +39,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                         enabled={guildAutomations.halvingCountdown}
                         currentChannelId={guildAutomations.halvingCountdownChannelId}
                         channels={guildChannels}
+                        time={guildAutomations.halvingCountdownTime}
                     />
                 </Card>
                     : <span className="text-left text-red-500 w-full mt-3 text-lg">{guildChannels.error}</span>

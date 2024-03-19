@@ -103,12 +103,15 @@ model GuildAutomations {
 
   heatmap          Boolean @default(false)
   heatmapChannelId String?
+  heatmapTime      Int @default(0)
 
   fearGreedIndex          Boolean @default(false)
   fearGreedIndexChannelId String?
+  fearGreedIndexTime      Int @default(0)
 
   halvingCountdown          Boolean @default(false)
   halvingCountdownChannelId String?
+  halvingCountdownTime      Int @default(0)
 }
 
 model DashboardLog {
