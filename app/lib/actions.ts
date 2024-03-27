@@ -467,20 +467,20 @@ export async function setGuildAutomationTime(guildId: string, automation: string
 export async function logDashboardActivity(guildId: string, message: string) {
   try {
     const session = await getServerSession(authOptions);
-    const userId = session?.user?.id;
+    const user = session?.user;
 
-    if (!userId) throw new Error('User id is undefined')
-
-    await prisma.dashboardLog.create({
-      data: {
-        guildId,
-        userId,
-        message
-      }
-    })
+    await axios.post(`${process.env.COINSHOT_SERVICES_API}/logActivity`, {
+      guildId,
+      user,
+      message
+    }, {
+      headers: {
+        'x-api-key': process.env.COINSHOT_SERVICES_KEY,
+      },
+      timeout: 10000,
+    });
 
     revalidatePath(`/dashboard/${guildId}`)
-    console.log('Dashboard activity logged in the database');
   } catch (error) {
     console.error(error);
   }

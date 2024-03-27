@@ -45,21 +45,21 @@ model Guild {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  users GuildUser[]
-  logs  DashboardLog[]
+  users       GuildUser[]
+  logs        DashboardLog[]
   discordLogs DiscordLog[]
 
   guildSettings    GuildSettings?
   guildCommands    GuildCommands?
   guildAutomations GuildAutomations?
 
-  name        String
-  iconUrl     String
-  memberCount Int
-  ownerId     String?
+  name             String
+  iconUrl          String
+  memberCount      Int
+  ownerId          String?
   generalChannelId String?
 
-  botPresent  Boolean @default(false)
+  botPresent  Boolean   @default(false)
   botJoinedAt DateTime?
 }
 
@@ -87,11 +87,16 @@ model GuildCommands {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  price          Boolean @default(true)
-  chart          Boolean @default(true)
-  heatmap        Boolean @default(true)
-  fearGreedIndex Boolean @default(true)
-  meme           Boolean @default(true)
+  price            Boolean @default(true)
+  chart            Boolean @default(true)
+  heatmap          Boolean @default(true)
+  fearGreedIndex   Boolean @default(true)
+  meme             Boolean @default(true)
+  information      Boolean @default(true)
+  watchlist        Boolean @default(true)
+  convert          Boolean @default(true)
+  halvingCountdown Boolean @default(true)
+  ticTacToe        Boolean @default(true)
 }
 
 model GuildAutomations {
@@ -103,15 +108,15 @@ model GuildAutomations {
 
   heatmap          Boolean @default(false)
   heatmapChannelId String?
-  heatmapTime      Int @default(0)
+  heatmapTime      Int     @default(0)
 
   fearGreedIndex          Boolean @default(false)
   fearGreedIndexChannelId String?
-  fearGreedIndexTime      Int @default(0)
+  fearGreedIndexTime      Int     @default(0)
 
   halvingCountdown          Boolean @default(false)
   halvingCountdownChannelId String?
-  halvingCountdownTime      Int @default(0)
+  halvingCountdownTime      Int     @default(0)
 }
 
 model DashboardLog {
@@ -134,8 +139,8 @@ model DiscordLog {
   guild   Guild  @relation(fields: [guildId], references: [id])
   guildId String
 
-  user String
-  type   String
+  user      String
+  type      String
   component String
-  message String
+  message   String
 }
