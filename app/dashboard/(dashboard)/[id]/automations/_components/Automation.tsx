@@ -147,7 +147,7 @@ export default function Automation({ name, displayName, description, enabled, ch
                     timesList.map((time, index) => (
                         <>
                             <div className="flex items-center justify-between">
-                                <Select key={index} value={time.toString()} onValueChange={(value) => updateTime(index, parseInt(value))} disabled={!automationEnabled}>
+                                <Select key={index} value={time.toString()} onValueChange={(value) => updateTime(index, parseInt(value))} disabled={!automationEnabled || isTimeLoading}>
                                     <SelectTrigger className="w-full">
                                         {
                                             (isTimeLoading && modifiedTimeIndex === index)
