@@ -10,9 +10,9 @@ export default function Layout({ params, children }: { params: { id: string }, c
 
     return (
         <ActiveIdProvider activeId={id}>
-            <main className='h-screen flex flex-col'>
+            <main className='flex flex-col h-screen'>
                 <Navbar />
-                <div className="flex w-full flex-grow">
+                <div className="flex w-full flex-grow" style={{ height: 'calc(100vh - 81px)' }}>
                     <Sidebar className='hidden lg:block' />
                     {children}
                 </div>

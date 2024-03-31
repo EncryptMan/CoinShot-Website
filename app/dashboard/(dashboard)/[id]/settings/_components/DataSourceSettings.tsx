@@ -32,7 +32,7 @@ export default function DataSourceSetting({ guildId, currentSource, className }:
                 setIsLoading(false)
                 setIsError(!success)
                 // toast(success ? `Data source updated to ${value}` : "Failed to update data source")
-                toast({ title: success ? "Success" : "Error", description: success ? `Data source updated to ${value}` : "Failed to update data source", variant: success ? "success" : "error" })
+                toast({ title: success ? "Success" : "Error", description: success ? `Data source updated to ${value}. Changes may take up to an hour to reflect.` : "Failed to update data source", variant: success ? "success" : "error" })
             })
     }
 

@@ -20,7 +20,7 @@ export default async function DashboardLogs({ guildId, className }: { guildId: s
     const guildDashboardLogs = await fetchGuildDashboardLogs(guildId);
 
     return (
-        <Card className={cn(`bg-slate-700 flex-grow w-full`, className)}>
+        <Card className={cn(`bg-slate-700 w-full`, className)}>
             <h1 className="font-semibold text-2xl px-5 pt-4 pb-2">Recent Dashboard Activity</h1>
             {(guildDashboardLogs === null || guildDashboardLogs.length === 0) ? <div className="px-5 py-2 text-neutral-200">No Logs</div> :
                 <div>

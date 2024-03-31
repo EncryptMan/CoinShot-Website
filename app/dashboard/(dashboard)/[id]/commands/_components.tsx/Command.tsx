@@ -37,7 +37,7 @@ export default function Command(
 
                     const action = state ? "enable" : "disable"
                     const commandName = displayName ?? name
-                    const successMessage = `/${commandName} command ${action}d`
+                    const successMessage = `/${commandName} command ${action}d. Changes may take up to an hour to reflect.`
                     const errorMessage = `Failed to ${action} ${commandName} command`
                     // toast(success ? successMessage : errorMessage)
                     toast({ title: success ? "Success" : "Error", description: success ? successMessage : errorMessage, variant: success ? "success" : "error" })
