@@ -15,9 +15,17 @@ export default async function Page({ params }: { params: { id: string } }) {
             {guildAutomations === null ? "Oops! 😕 We're unable to load the automations right now. Could you please refresh the page? 🔄" :
                 Array.isArray(guildChannels) ? <Card className="flex flex-col gap-3 mt-5 p-3 bg-gray-900 w-full">
                     <Automation
+                        displayName="News"
+                        name="news"
+                        description="Send important cryptocurrency news right into your server"
+                        enabled={guildAutomations.news}
+                        currentChannelId={guildAutomations.newsChannelId}
+                        channels={guildChannels}
+                    />
+                    <Automation
                         displayName="Heatmap"
                         name="heatmap"
-                        description="Send cryptocurrency market heatmap daily"
+                        description="Get a bird's eye view of the cryptocurrency market with the heatmap"
                         enabled={guildAutomations.heatmap}
                         currentChannelId={guildAutomations.heatmapChannelId}
                         channels={guildChannels}
@@ -26,7 +34,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                     <Automation
                         displayName="Fear and Greed Index"
                         name="fearGreedIndex"
-                        description="Send fear and green index daily"
+                        description="Send the fear and greed index of the cryptocurrency market"
                         enabled={guildAutomations.fearGreedIndex}
                         currentChannelId={guildAutomations.fearGreedIndexChannelId}
                         channels={guildChannels}
@@ -35,7 +43,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                     <Automation
                         displayName="Bitcoin Halving Countdown"
                         name="halvingCountdown"
-                        description="Send bitcoin halving countdown daily"
+                        description="Send the time remaining until the next Bitcoin halving event"
                         enabled={guildAutomations.halvingCountdown}
                         currentChannelId={guildAutomations.halvingCountdownChannelId}
                         channels={guildChannels}

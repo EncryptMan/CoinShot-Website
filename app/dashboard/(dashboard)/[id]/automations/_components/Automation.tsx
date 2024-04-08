@@ -13,7 +13,7 @@ import { Plus, X } from "lucide-react";
 import { useContext, useState } from "react";
 
 
-export default function Automation({ name, displayName, description, enabled, channels, currentChannelId, times }: { name: string, displayName?: string, description: string, enabled: boolean, channels: { id: string, name: string }[], currentChannelId: string | null, times: number[] }) {
+export default function Automation({ name, displayName, description, enabled, channels, currentChannelId, times }: { name: string, displayName?: string, description: string, enabled: boolean, channels: { id: string, name: string }[], currentChannelId: string | null, times?: number[] }) {
     const guildId = useContext(ActiveIdContext)
 
     const [automationEnabled, setAutomationEnabled] = useState(enabled)
@@ -24,7 +24,7 @@ export default function Automation({ name, displayName, description, enabled, ch
     const [isChannelLoading, setIsChannelLoading] = useState(false)
     const [channelError, setChannelError] = useState(null as string | null)
 
-    const [timesList, setTimesList] = useState(times)
+    const [timesList, setTimesList] = useState(times ?? [] as number[])
     const [isTimeLoading, setIsTimeLoading] = useState(false)
     const [timeError, setTimeError] = useState(null as string | null)
     const [modifiedTimeIndex, setModifiedTimeIndex] = useState(0)
@@ -141,46 +141,50 @@ export default function Automation({ name, displayName, description, enabled, ch
                 </SelectContent>
             </Select>
             {channelError && <p className="text-sm text-red-500">{channelError}</p>}
-            <p className={cn("mt-4 text-neutral-400", automationEnabled && 'text-white')}>{"Time (UTC)"}</p>
-            <div className="flex flex-col gap-1">
-                {
-                    timesList.map((time, index) => (
-                        <>
-                            <div className="flex items-center justify-between">
-                                <Select key={index} value={time.toString()} onValueChange={(value) => updateTime(index, parseInt(value))} disabled={!automationEnabled || isTimeLoading}>
-                                    <SelectTrigger className="w-full">
-                                        {
-                                            (isTimeLoading && modifiedTimeIndex === index)
-                                                ? <LoadingSpinner />
-                                                : <SelectValue placeholder="00:00" />
-                                        }
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        {Array.from({ length: 24 }, (_, i) => i).map((time) => (
-                                            <SelectItem key={time} value={time.toString()}>
-                                                {time < 10 ?
-                                                    <span>0{time}:00</span> :
-                                                    <span>{time}:00</span>
+            {times !== undefined &&
+                <>
+                    <p className={cn("mt-4 text-neutral-400", automationEnabled && 'text-white')}>{"Time (UTC)"}</p>
+                    <div className="flex flex-col gap-1">
+                        {
+                            timesList.map((time, index) => (
+                                <>
+                                    <div className="flex items-center justify-between">
+                                        <Select key={index} value={time.toString()} onValueChange={(value) => updateTime(index, parseInt(value))} disabled={!automationEnabled || isTimeLoading}>
+                                            <SelectTrigger className="w-full">
+                                                {
+                                                    (isTimeLoading && modifiedTimeIndex === index)
+                                                        ? <LoadingSpinner />
+                                                        : <SelectValue placeholder="00:00" />
                                                 }
-                                            </SelectItem>
-                                        ))
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                {Array.from({ length: 24 }, (_, i) => i).map((time) => (
+                                                    <SelectItem key={time} value={time.toString()}>
+                                                        {time < 10 ?
+                                                            <span>0{time}:00</span> :
+                                                            <span>{time}:00</span>
+                                                        }
+                                                    </SelectItem>
+                                                ))
+                                                }
+                                            </SelectContent>
+                                        </Select>
+                                        {
+                                            (timesList.length > 1 && automationEnabled) && <Button onClick={() => removeTime(index)} variant={'ghost'}><X className="text-red-500" /></Button>
                                         }
-                                    </SelectContent>
-                                </Select>
-                                {
-                                    (timesList.length > 1 && automationEnabled) && <Button onClick={() => removeTime(index)} variant={'ghost'}><X className="text-red-500" /></Button>
-                                }
-                            </div>
-                            {(timeError && modifiedTimeIndex === index) && <p className="text-sm text-red-500">{timeError}</p>}
-                        </>
-                    ))
-                }
-                <div className="flex flex-row-reverse items-center justify-between">
-                    {
-                        (automationEnabled && timesList.length < 5) && <Button onClick={addTime} variant={'ghost'}><Plus /></Button>
-                    }
-                </div>
-            </div>
+                                    </div>
+                                    {(timeError && modifiedTimeIndex === index) && <p className="text-sm text-red-500">{timeError}</p>}
+                                </>
+                            ))
+                        }
+                        <div className="flex flex-row-reverse items-center justify-between">
+                            {
+                                (automationEnabled && timesList.length < 5) && <Button onClick={addTime} variant={'ghost'}><Plus /></Button>
+                            }
+                        </div>
+                    </div>
+                </>
+            }
         </Card>
     );
 }
