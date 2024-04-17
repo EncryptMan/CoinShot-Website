@@ -5,7 +5,7 @@ import { prisma } from "@/utils/db";
 import { revalidatePath } from "next/cache";
 import authOptions from "@/auth.options";
 import axios, { AxiosError } from "axios";
-import { DataSource, Guild } from "@prisma/client";
+import { DataSource, Guild, NewsCategories, NewsMessageStyle } from "@prisma/client";
 
 
 export async function fetchGuilds() {
@@ -462,6 +462,58 @@ export async function setGuildAutomationTimes(guildId: string, automation: strin
   } catch (error) {
     console.error(error);
     return { error: 'Failed to update automation times' }
+  }
+}
+
+export async function setGuildNewsAutomationCategories(guildId: string, categories: string[]) {
+  try {
+    await authorizeUser(guildId);
+
+    // Validate categories
+    if (categories.some(category => !Object.values(NewsCategories).includes(category as NewsCategories))) return { error: 'Invalid category' }
+
+    await prisma.guildAutomations.update({
+      where: {
+        id: guildId,
+      },
+      data: {
+        newsCategories: categories.map(category => category as NewsCategories),
+      },
+    });
+
+    const logMessage = `News automation categories updated`;
+    await logDashboardActivity(guildId, logMessage);
+
+    return {}
+  } catch (error) {
+    console.error(error);
+    return { error: 'Failed to update news automation categories' }
+  }
+}
+
+export async function setGuildNewsAutomationMessageStyle(guildId: string, messageStyle: string) {
+  try {
+    await authorizeUser(guildId);
+
+    // Validate message style
+    if (!Object.values(NewsMessageStyle).includes(messageStyle as NewsMessageStyle)) return { error: 'Invalid message style' }
+
+    await prisma.guildAutomations.update({
+      where: {
+        id: guildId,
+      },
+      data: {
+        newsMessageStyle: messageStyle as NewsMessageStyle,
+      },
+    });
+
+    const logMessage = `News automation message style updated`;
+    await logDashboardActivity(guildId, logMessage);
+
+    return {}
+  } catch (error) {
+    console.error(error);
+    return { error: 'Failed to update news automation message style' }
   }
 }
 

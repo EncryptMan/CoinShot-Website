@@ -121,6 +121,22 @@ model GuildAutomations {
 
   news          Boolean @default(false)
   newsChannelId String?
+  newsCategories NewsCategories[] @default([Cryptocurrency])
+  newsMessageStyle NewsMessageStyle @default(Image)
+}
+
+enum NewsCategories {
+  Cryptocurrency
+  Markets
+  Technology
+  Business
+  Finance
+  World
+}
+
+enum NewsMessageStyle {
+  Image
+  Embed
 }
 
 model DashboardLog {
