@@ -108,10 +108,6 @@ export default function NewsAutomation({ name, displayName, description, enabled
                         <Image
                             src={'/news-embed-style.png'}
                             alt="News Embed Style"
-                            style={{
-                                width: 'auto',
-                                height: '100%',
-                            }}
                             width={300}
                             height={300}
                             draggable={false}
