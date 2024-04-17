@@ -1,6 +1,6 @@
 'use client'
 
-import { NewsCategories, NewsMessageStyle } from "@prisma/client";
+import { NewsCategory, NewsMessageStyle } from "@prisma/client";
 import BaseAutomation from "./BaseAutomation";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { ActiveIdContext } from "../../_components/ActiveIdProvider";
@@ -14,7 +14,7 @@ import { setGuildNewsAutomationCategories, setGuildNewsAutomationMessageStyle } 
 import { LoadingSpinner } from "@/app/components/LoadingSpinner";
 
 
-export default function NewsAutomation({ name, displayName, description, enabled, channels, currentChannelId, selectedCategories, selectedMessageStyle, children }: { name: string, displayName?: string, description: string, enabled: boolean, channels: { id: string, name: string }[], currentChannelId: string | null, selectedCategories: NewsCategories[], selectedMessageStyle: NewsMessageStyle, children?: React.ReactNode }) {
+export default function NewsAutomation({ name, displayName, description, enabled, channels, currentChannelId, selectedCategories, selectedMessageStyle, children }: { name: string, displayName?: string, description: string, enabled: boolean, channels: { id: string, name: string }[], currentChannelId: string | null, selectedCategories: NewsCategory[], selectedMessageStyle: NewsMessageStyle, children?: React.ReactNode }) {
     const guildId = useContext(ActiveIdContext)
 
     const [messageStyle, setMessageStyle] = useState(selectedMessageStyle)
@@ -71,7 +71,7 @@ export default function NewsAutomation({ name, displayName, description, enabled
         <BaseAutomation name={name} displayName={displayName} description={description} enabled={enabled} channels={channels} currentChannelId={currentChannelId}>
             <p className={cn("mt-4 text-white text-lg")}>Categories</p>
             <div className="w-full mt-2">
-                <Tags tags={selectedCategories.map((category) => category)} options={Object.values(NewsCategories)} setTags={updateCategories} />
+                <Tags tags={selectedCategories.map((category) => category)} options={Object.values(NewsCategory)} setTags={updateCategories} />
             </div>
             <p className={cn("mt-4 text-white text-lg")}>Message Style</p>
             <div className="w-full flex items-center gap-2 justify-around max-md:flex-col mt-3">
@@ -205,7 +205,7 @@ function Tags({
         <div className="relative inline-block" ref={ref}>
             <div className="flex flex-wrap gap-2 items-center">
                 {localTags.map((tag, index) => (
-                    <div>
+                    <div key={index}>
                         {isLoading && modifiedIndex === index ?
                             <LoadingSpinner size={30} />
                             :

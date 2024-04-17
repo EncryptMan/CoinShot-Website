@@ -5,7 +5,7 @@ import { prisma } from "@/utils/db";
 import { revalidatePath } from "next/cache";
 import authOptions from "@/auth.options";
 import axios, { AxiosError } from "axios";
-import { DataSource, Guild, NewsCategories, NewsMessageStyle } from "@prisma/client";
+import { DataSource, Guild, NewsCategory, NewsMessageStyle } from "@prisma/client";
 
 
 export async function fetchGuilds() {
@@ -470,14 +470,14 @@ export async function setGuildNewsAutomationCategories(guildId: string, categori
     await authorizeUser(guildId);
 
     // Validate categories
-    if (categories.some(category => !Object.values(NewsCategories).includes(category as NewsCategories))) return { error: 'Invalid category' }
+    if (categories.some(category => !Object.values(NewsCategory).includes(category as NewsCategory))) return { error: 'Invalid category' }
 
     await prisma.guildAutomations.update({
       where: {
         id: guildId,
       },
       data: {
-        newsCategories: categories.map(category => category as NewsCategories),
+        newsCategories: categories.map(category => category as NewsCategory),
       },
     });
 
