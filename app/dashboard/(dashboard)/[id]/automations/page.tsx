@@ -48,16 +48,6 @@ export default async function Page({ params }: { params: { id: string } }) {
                             channels={guildChannels}
                             times={guildAutomations.fearGreedIndexTimes}
                             />
-                        <TimeBasedAutomation
-                            key="halvingCountdown"
-                            displayName="Bitcoin Halving Countdown"
-                            name="halvingCountdown"
-                            description="Send the time remaining until the next Bitcoin halving event"
-                            enabled={guildAutomations.halvingCountdown}
-                            currentChannelId={guildAutomations.halvingCountdownChannelId}
-                            channels={guildChannels}
-                            times={guildAutomations.halvingCountdownTimes}
-                            />
             </div>
                     : <span className="text-left text-red-500 w-full mt-3 text-lg">{guildChannels.error}</span>
             }

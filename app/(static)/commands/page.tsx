@@ -16,7 +16,6 @@ export default function Page() {
                 <Command name="convert" requiredParameters={["input"]} optionalParameters={[]} description="Convert a coin or token to another." usages={["/convert 10 btc to eth", "/convert 5 dot ada"]}/>
                 <Command name="fear-greed-index" requiredParameters={[]} optionalParameters={[]} description="View fear and greed index of cryptocurrency market." usages={["/fear-greed-index"]}/>
                 <Command name="heatmap" requiredParameters={[]} optionalParameters={[]} description="View heatmap of cryptocurrency market." usages={["/heatmap"]}/>
-                <Command name="halving-countdown" requiredParameters={[]} optionalParameters={[]} description="Displays the time remaining until the next Bitcoin halving event." usages={["/halving-countdown"]}/>
                 <Command name="tic-tac-toe" requiredParameters={[]} optionalParameters={["opponent"]} description="Play a game of tic-tac-toe with bot or another user." usages={["/tic-tac-toe", "/tic-tac-toe @Cyde"]}/>
                 <Command name="meme" requiredParameters={[]} optionalParameters={[]} description="Show a random meme." usages={["/meme"]}/>
             </Accordion>

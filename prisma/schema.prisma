@@ -95,7 +95,6 @@ model GuildCommands {
   information      Boolean @default(true)
   watchlist        Boolean @default(true)
   convert          Boolean @default(true)
-  halvingCountdown Boolean @default(true)
   ticTacToe        Boolean @default(true)
   news             Boolean @default(true)
 }
@@ -114,10 +113,6 @@ model GuildAutomations {
   fearGreedIndex          Boolean @default(false)
   fearGreedIndexChannelId String?
   fearGreedIndexTimes     Int[]   @default([0])
-
-  halvingCountdown          Boolean @default(false)
-  halvingCountdownChannelId String?
-  halvingCountdownTimes     Int[]   @default([0])
 
   news          Boolean @default(false)
   newsChannelId String?
