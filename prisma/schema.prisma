@@ -61,6 +61,8 @@ model Guild {
 
   botPresent  Boolean   @default(false)
   botJoinedAt DateTime?
+
+  isPremium Boolean @default(false)
 }
 
 model GuildSettings {

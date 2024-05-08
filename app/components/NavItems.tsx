@@ -8,30 +8,25 @@ const verala = Varela_Round({
     weight: ['400'],
 })
 
-export default function NavItems({ className }: { className?: string}) {
+export default function NavItems({ className, rowClassName, buttonClassName }: { className?: string, rowClassName?: string, buttonClassName?: string}) {
     return (
-        <div className={cn("flex items-center gap-3", verala.className, className)}>
-            <Button asChild variant={'ghost'} className="hover:bg-gray-700/50 text-neutral-400 text-lg hover:text-neutral-200">
+        <div className={cn("flex items-center", verala.className, rowClassName)}>
+            <Button asChild variant={'ghost'} className={cn("hover:bg-gray-700/50 text-neutral-400 hover:text-neutral-200", buttonClassName)}>
                 <Link href="/commands">
                     Commands
                 </Link>
             </Button>
-            <Button asChild variant={'ghost'} className="hover:bg-gray-700/50 text-neutral-400 text-lg hover:text-neutral-200">
+            <Button asChild variant={'ghost'} className={cn("hover:bg-gray-700/50 text-neutral-400 hover:text-neutral-200", buttonClassName)}>
                 <Link href="/#features">
                     Features
                 </Link>
             </Button>
-            {/* <Button asChild variant={'ghost'} className="hover:bg-gray-700/50 text-neutral-400 text-lg hover:text-neutral-200">
-                <Link href="/#pricing">
-                    Pricing
-                </Link>
-            </Button> */}
-            <Button asChild variant={'ghost'} className="hover:bg-gray-700/50 text-neutral-400 text-lg hover:text-neutral-200">
+            <Button asChild variant={'ghost'} className={cn("hover:bg-gray-700/50 text-neutral-400 hover:text-neutral-200", buttonClassName)}>
                 <Link href="/#support">
                     Support
                 </Link>
             </Button>
-            <Button asChild variant={'ghost'} className="hover:bg-gray-700/50 text-neutral-400 text-lg hover:text-neutral-200">
+            <Button asChild variant={'ghost'} className={cn("hover:bg-gray-700/50 text-neutral-400 hover:text-neutral-200", buttonClassName)}>
                 <Link href="/blog">
                     Blogs
                 </Link>
