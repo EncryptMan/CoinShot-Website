@@ -16,7 +16,7 @@ export default async function Layout({
                 <div className="flex gap-3 max-sm:gap-1">
                     <Link href='/privacy'>Privacy Policy</Link>
                     <Link href='/terms'>Terms of Service</Link>
-                </div>
+             </div>
             </footer>
         </main>
     )
