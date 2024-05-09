@@ -66,11 +66,9 @@ export default function Navbar() {
                     <Sheet open={isSidebarOpen} onOpenChange={setSidebarOpen}>
                         <SheetTrigger className="block md:hidden" onClick={() => setSidebarOpen(true)} asChild><Button variant={'ghost'} className="p-0"><CgMenuRight size={25} className="lg:hidden block text-neutral-300" /></Button></SheetTrigger>
                         <SheetContent side={'right'} className="bg-gray-800" >
-                            <div className="w-full p-3">
-                                <AuthButton isOnNavbar={false} />
-                            </div>
+                            <AuthButton isOnNavbar={false} />
                             <hr className="border-slate-600" />
-                            <NavItems className="flex-col items-start" rowClassName="flex-col items-start gap-2 mt-3" buttonClassName="text-md" />
+                            <NavItems className="flex-col items-start" rowClassName="flex-col items-start gap-2 mt-3" buttonClassName="text-lg" />
                         </SheetContent>
                     </Sheet>
                 </div>
