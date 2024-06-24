@@ -12,6 +12,7 @@ export default function Page() {
                 <Command name="chart" requiredParameters={["symbol"]} optionalParameters={[]} description="See the chart of a coin or token." usages={["/chart btc", "/chart eth/btc", "/chart solana"]}/>
                 <Command name="information" requiredParameters={["name"]} optionalParameters={[]} description="Get information about a coin or token." usages={["/information btc", "/information ethereum"]}/>
                 <Command name="news" requiredParameters={[]} optionalParameters={["page"]} description="View the latest news in the cryptocurrency market." usages={["/news", "/news 5"]}/>
+                <Command name="ask" requiredParameters={["question"]} optionalParameters={[]} description="Ask CoinShot AI anything about cryptocurrency." usages={["/ask What are the latest news about Bitcoin?", "/ask What is the price of Ethereum?"]}/>
                 <Command name="watchlist" requiredParameters={[]} optionalParameters={["user"]} description="Displays your watchlist or the watchlist of the specified user." usages={["/watchlist", "/watchlist @Cyde"]}/>
                 <Command name="convert" requiredParameters={["input"]} optionalParameters={[]} description="Convert a coin or token to another." usages={["/convert 10 btc to eth", "/convert 5 dot ada"]}/>
                 <Command name="fear-greed-index" requiredParameters={[]} optionalParameters={[]} description="View fear and greed index of cryptocurrency market." usages={["/fear-greed-index"]}/>

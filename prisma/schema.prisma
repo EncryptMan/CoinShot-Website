@@ -99,6 +99,7 @@ model GuildCommands {
   convert          Boolean @default(true)
   ticTacToe        Boolean @default(true)
   news             Boolean @default(true)
+  ask              Boolean @default(true)
 }
 
 model GuildAutomations {

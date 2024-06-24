@@ -17,6 +17,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                     <Command name="chart" description="See the chart of a coin or token" enabled={guildCommands.chart} guildId={id} />
                     <Command name="information" description="Get information about a coin or token" enabled={guildCommands.information} guildId={id} />
                     <Command name="news" description="View the latest news in the cryptocurrency market" enabled={guildCommands.news} guildId={id} />
+                    <Command name="ask" description="Ask CoinShot AI anything about cryptocurrency" enabled={guildCommands.ask} guildId={id} />
                     <Command name="watchlist" description="Displays your watchlist or the watchlist of the specified user" enabled={guildCommands.watchlist} guildId={id} />
                     <Command name="convert" description="Convert a coin or token to another" enabled={guildCommands.convert} guildId={id} />
                     <Command displayName="fear-greed-index" name="fearGreedIndex" description="View fear and greed index of cryptocurrency market" enabled={guildCommands.fearGreedIndex} guildId={id} />
