@@ -51,6 +51,11 @@ export default function AuthButton({ isOnNavbar = true, className }: { isOnNavba
                                 Dashboard
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
+                        <DropdownMenuGroup>
+                            <DropdownMenuItem onClick={() => router.push('/profile')}>
+                                Profile
+                            </DropdownMenuItem>
+                        </DropdownMenuGroup>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={() => signOut()}>
                             Log out
@@ -82,7 +87,7 @@ export default function AuthButton({ isOnNavbar = true, className }: { isOnNavba
                         className={cn(
                             "flex flex-col items-start gap-2 mb-3 transition-height duration-500 ease-in-out overflow-hidden",
                             verala.className,
-                            dropdownOpen ? "h-[88px]" : "h-0"
+                            dropdownOpen ? "h-[140px]" : "h-0"
                         )}
                     >
                         <Button
@@ -91,6 +96,13 @@ export default function AuthButton({ isOnNavbar = true, className }: { isOnNavba
                             className="hover:bg-gray-700/50 text-neutral-400 hover:text-neutral-200 text-lg"
                         >
                             Dashboard
+                        </Button>
+                        <Button
+                            onClick={() => router.push("/profile")}
+                            variant={"ghost"}
+                            className="hover:bg-gray-700/50 text-neutral-400 hover:text-neutral-200 text-lg"
+                        >
+                            Profile
                         </Button>
                         <Button
                             onClick={() => signOut()}

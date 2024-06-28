@@ -22,6 +22,7 @@ model User {
 
   guilds GuildUser[]
   logs   DashboardLog[]
+  connections Connection[]
 }
 
 model GuildUser {
@@ -89,17 +90,17 @@ model GuildCommands {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  price            Boolean @default(true)
-  chart            Boolean @default(true)
-  heatmap          Boolean @default(true)
-  fearGreedIndex   Boolean @default(true)
-  meme             Boolean @default(true)
-  information      Boolean @default(true)
-  watchlist        Boolean @default(true)
-  convert          Boolean @default(true)
-  ticTacToe        Boolean @default(true)
-  news             Boolean @default(true)
-  ask              Boolean @default(true)
+  price          Boolean @default(true)
+  chart          Boolean @default(true)
+  heatmap        Boolean @default(true)
+  fearGreedIndex Boolean @default(true)
+  meme           Boolean @default(true)
+  information    Boolean @default(true)
+  watchlist      Boolean @default(true)
+  convert        Boolean @default(true)
+  ticTacToe      Boolean @default(true)
+  news           Boolean @default(true)
+  ask            Boolean @default(true)
 }
 
 model GuildAutomations {
@@ -117,9 +118,9 @@ model GuildAutomations {
   fearGreedIndexChannelId String?
   fearGreedIndexTimes     Int[]   @default([0])
 
-  news          Boolean @default(false)
-  newsChannelId String?
-  newsCategories NewsCategory[] @default([Cryptocurrency])
+  news             Boolean          @default(false)
+  newsChannelId    String?
+  newsCategories   NewsCategory[]   @default([Cryptocurrency])
   newsMessageStyle NewsMessageStyle @default(Image)
 }
 
@@ -161,4 +162,27 @@ model DiscordLog {
   type      String
   component String
   message   String
+}
+
+model Watchlist {
+  id String @id @map("_id")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  symbols String[]
+}
+
+model Connection {
+  id        String   @id @default(uuid()) @map("_id")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  exchange  String
+  apiKey    String
+  secretKey String
+  passphrase String
 }

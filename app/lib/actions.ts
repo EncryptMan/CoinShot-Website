@@ -6,6 +6,108 @@ import { revalidatePath } from "next/cache";
 import authOptions from "@/auth.options";
 import axios, { AxiosError } from "axios";
 import { DataSource, Guild, NewsCategory, NewsMessageStyle } from "@prisma/client";
+import { redirect } from "next/navigation";
+import { encrypt } from "./utils";
+
+
+export async function fetchConnections() {
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user?.id) return [];
+
+  try {
+    const connections = await prisma.connection.findMany({
+      where: {
+        userId: session?.user?.id,
+      },
+      select: {
+        exchange: true, // Select only the exchange field. Don't select api and secret fields.
+        createdAt: true,
+      },
+    });
+
+    console.log('Connections fetched from database');
+    return connections;
+  }
+  catch (error) {
+    console.error(error);
+  }
+
+  return [];
+
+}
+
+export async function createConnection(exchange: string, apiKey: string, secretKey: string, passphrase: string) {
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user?.id) return { error: 'You must be signed in to perform this action' };
+
+  // Validate input data
+  if (!exchange) return { error: 'Exchange is required' };
+  if (!['Bitget'].includes(exchange)) return { error: 'Invalid exchange' };
+  if (!apiKey) return { error: 'API Key is required' };
+  if (!secretKey) return { error: 'Secret Key is required' };
+  if (!passphrase) return { error: 'Passphrase is required' };
+
+  try {
+    // Make sure the connection does not already exist
+    const existingConnection = await prisma.connection.findFirst({
+      where: {
+        userId: session?.user?.id,
+        exchange,
+      },
+    });
+
+    if (existingConnection) return { error: `Connection for ${exchange} already exists` };
+
+    await prisma.connection.create({
+      data: {
+        userId: session?.user?.id,
+        exchange,
+        apiKey: encrypt(apiKey),
+        secretKey: encrypt(secretKey),
+        passphrase: encrypt(passphrase),
+      },
+    });
+
+    console.log('Connection created');
+
+    revalidatePath('/profile/connections');
+    return {};
+  }
+  catch (error) {
+    console.error(error);
+  }
+
+  return { error: 'Failed to create connection' };
+}
+
+export async function deleteConnection(exchange: string) {
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user?.id) return { error: 'You must be signed in to perform this action' };
+
+  // Validate input data
+  if (!exchange) return { error: 'Exchange is required' };
+  if (!['Bitget'].includes(exchange)) return { error: 'Invalid exchange' };
+
+  try {
+    await prisma.connection.deleteMany({
+      where: {
+        userId: session?.user?.id,
+        exchange,
+      },
+    });
+
+    console.log('Connection deleted');
+    revalidatePath('/profile/connections');
+    return {};
+  }
+  catch (error) {
+    console.error(error);
+    return { error: 'Failed to delete connection' };      
+  }
+}
 
 
 export async function fetchGuilds() {

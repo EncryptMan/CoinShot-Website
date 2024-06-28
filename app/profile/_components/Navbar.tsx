@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { Anton, Varela_Round } from 'next/font/google'
 import { SheetContent, SheetTrigger, Sheet } from "@/components/ui/sheet";
 import Sidebar from "./Sidebar";
+import { Guild } from "@prisma/client";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { CgMenuLeft } from "react-icons/cg";
