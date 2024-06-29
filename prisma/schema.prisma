@@ -101,6 +101,7 @@ model GuildCommands {
   ticTacToe      Boolean @default(true)
   news           Boolean @default(true)
   ask            Boolean @default(true)
+  balance        Boolean @default(true)
 }
 
 model GuildAutomations {
