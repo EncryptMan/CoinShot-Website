@@ -19,6 +19,7 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
+import Image from "next/image";
 
 
 export default function Connection({ exchange, createdAt }: { exchange: string, createdAt: Date }) {
@@ -70,9 +71,19 @@ export default function Connection({ exchange, createdAt }: { exchange: string, 
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
-            <div>
-                <p className="text-lg font-bold text-neutral-200">{exchange}</p>
-                <p className="text-sm text-neutral-400">Connected on {createdAt.toLocaleDateString()}</p>
+            <div className="flex items-center gap-4 w-2/3 flex-grow">
+                <div className="rounded-xl overflow-hidden">
+                    <Image
+                        alt={`${exchange} logo`}
+                        src={`/apps/${exchange.toLowerCase()}.png`}
+                        width={40}
+                        height={40}
+                    />
+                </div>
+                <div className="flex-grow">
+                    <p className="text-lg font-bold text-neutral-200">{exchange}</p>
+                    <p className="text-sm text-neutral-400">Connected on {createdAt.toLocaleDateString()}</p>
+                </div>
             </div>
             <div className="w-10 flex justify-center flex-col">
                 {isLoading ?

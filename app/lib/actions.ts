@@ -64,9 +64,9 @@ export async function createConnection(exchange: string, apiKey: string, secretK
       data: {
         userId: session?.user?.id,
         exchange,
-        apiKey: encrypt(apiKey),
-        secretKey: encrypt(secretKey),
-        passphrase: encrypt(passphrase),
+        apiKey: encrypt(apiKey.trim()),
+        secretKey: encrypt(secretKey.trim()),
+        passphrase: encrypt(passphrase.trim()),
       },
     });
 
