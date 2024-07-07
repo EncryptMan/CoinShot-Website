@@ -23,8 +23,6 @@ export default async function Page({ params }: { params: { id: string } }) {
                     <Command name="convert" description="Convert a coin or token to another" enabled={guildCommands.convert} guildId={id} />
                     <Command displayName="fear-greed-index" name="fearGreedIndex" description="View fear and greed index of cryptocurrency market" enabled={guildCommands.fearGreedIndex} guildId={id} />
                     <Command name="heatmap" description="View heatmap of cryptocurrency market" enabled={guildCommands.heatmap} guildId={id} />
-                    <Command name="ticTacToe" displayName="tic-tac-toe" description="Play a game of tic-tac-toe with bot or another user" enabled={guildCommands.ticTacToe} guildId={id} />
-                    <Command name="meme" description="Shows a random meme" enabled={guildCommands.meme} guildId={id} />
                 </Card>
             }
         </DashboardPage>
