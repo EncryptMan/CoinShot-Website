@@ -356,7 +356,7 @@ export async function sendGateway(gateway: PaymentGateway, channelId: string) {
                 type: 2, // Button
                 label: gateway.buttonLabel,
                 style: style,
-                custom_id: 'join_now_button', // Custom ID for identifying button interactions
+                custom_id: `gatewayId:${gateway.id}`, // Updated to match the regex format
             }],
         }],
     };
