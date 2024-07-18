@@ -5,11 +5,11 @@ import ServerSwitcher from "./ServerSwitcher"
 
 import NavItem from "./NavItem"
 import { useContext } from "react"
-import { ActiveIdContext } from "./ActiveIdProvider"
-import { ChevronRightSquare, Home, Bolt, Repeat2, TrendingUp } from "lucide-react"
+import { ActiveGuildIdContext } from "./ActiveIdProvider"
+import { ChevronRightSquare, Home, Bolt, Repeat2, Bitcoin } from "lucide-react"
 
 export default function Sidebar({ className }: { className?: string }) {
-    const activeId = useContext<string>(ActiveIdContext);
+    const activeId = useContext<string>(ActiveGuildIdContext);
 
     return (
         <aside className={cn("h-full w-72 bg-gray-800 backdrop-blur-2xl border-r border-gray-700", className)}>
@@ -21,6 +21,7 @@ export default function Sidebar({ className }: { className?: string }) {
             <NavItem href={`/dashboard/${activeId}`} title="Home" Icon={Home} />
             <NavItem href={`/dashboard/${activeId}/commands`} title="Commands" Icon={ChevronRightSquare} />
             <NavItem href={`/dashboard/${activeId}/automations`} title="Automations" Icon={Repeat2} />
+            <NavItem href={`/dashboard/${activeId}/payments`} title="Payment Gateway" Icon={Bitcoin} />
             <NavItem href={`/dashboard/${activeId}/settings`} title="Settings" Icon={Bolt} />
         </aside>
     )

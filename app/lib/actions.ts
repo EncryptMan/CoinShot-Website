@@ -641,8 +641,11 @@ export async function logDashboardActivity(guildId: string, message: string) {
   }
 }
 
-async function authorizeUser(guildId: string) {
+export async function authorizeUser(guildId: string) {
   const session = await getServerSession(authOptions);
+
+  if (!session?.user?.id) throw new Error('You must be signed in to perform this action');
+
   const guildUserCount = await prisma.guildUser.count({
     where: {
       userId: session?.user?.id,
@@ -650,7 +653,7 @@ async function authorizeUser(guildId: string) {
     },
   });
 
-  if (guildUserCount === 0) throw new Error('You must be signed in to perform this action');
+  if (guildUserCount === 0) throw new Error('You dont have access to this server');
 }
 
 async function authorizeUserSafe(guildId: string) {

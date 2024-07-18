@@ -1,7 +1,7 @@
 import Sidebar from "./_components/Sidebar";
 import Navbar from './_components/Navbar';
 import { Toaster } from "@/components/ui/toaster"
-import ActiveIdProvider from "./_components/ActiveIdProvider";
+import ActiveGuildIdProvider from "./_components/ActiveIdProvider";
 
 
 export default function Layout({ params, children }: { params: { id: string }, children: React.ReactNode }) {
@@ -9,7 +9,7 @@ export default function Layout({ params, children }: { params: { id: string }, c
     const { id } = params;
 
     return (
-        <ActiveIdProvider activeId={id}>
+        <ActiveGuildIdProvider activeId={id}>
             <main className='flex flex-col h-screen'>
                 <Navbar />
                 <div className="flex w-full flex-grow" style={{ height: 'calc(100vh - 81px)' }}>
@@ -18,6 +18,6 @@ export default function Layout({ params, children }: { params: { id: string }, c
                 </div>
             </main>
             <Toaster />
-        </ActiveIdProvider>
+        </ActiveGuildIdProvider>
     )
 }

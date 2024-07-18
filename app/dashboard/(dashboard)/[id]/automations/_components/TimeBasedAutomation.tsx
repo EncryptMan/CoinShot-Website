@@ -1,7 +1,7 @@
 'use client'
 
 import { LoadingSpinner } from "@/app/components/LoadingSpinner";
-import { ActiveIdContext } from "@/app/dashboard/(dashboard)/[id]/_components/ActiveIdProvider";
+import { ActiveGuildIdContext } from "@/app/dashboard/(dashboard)/[id]/_components/ActiveIdProvider";
 import { setGuildAutomationTimes } from "@/app/lib/actions";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -13,7 +13,7 @@ import BaseAutomation from "./BaseAutomation";
 
 
 export default function TimeBasedAutomation({ name, displayName, description, enabled, channels, currentChannelId, times, children }: { name: string, displayName?: string, description: string, enabled: boolean, channels: { id: string, name: string }[], currentChannelId: string | null, times: number[], children?: React.ReactNode }) {
-    const guildId = useContext(ActiveIdContext)
+    const guildId = useContext(ActiveGuildIdContext)
 
     const [timesList, setTimesList] = useState(times)
     const [isTimeLoading, setIsTimeLoading] = useState(false)

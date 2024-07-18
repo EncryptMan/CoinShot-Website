@@ -20,9 +20,10 @@ model User {
   discriminator String
   avatarUrl     String?
 
-  guilds GuildUser[]
-  logs   DashboardLog[]
-  connections Connection[]
+  guilds         GuildUser[]
+  logs           DashboardLog[]
+  connections    Connection[]
+  paymentGateway PaymentGateway[]
 }
 
 model GuildUser {
@@ -46,9 +47,10 @@ model Guild {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  users       GuildUser[]
-  logs        DashboardLog[]
-  discordLogs DiscordLog[]
+  users          GuildUser[]
+  logs           DashboardLog[]
+  discordLogs    DiscordLog[]
+  paymentGateway PaymentGateway[]
 
   guildSettings    GuildSettings?
   guildCommands    GuildCommands?
@@ -182,8 +184,54 @@ model Connection {
   userId String
   user   User   @relation(fields: [userId], references: [id])
 
-  exchange  String
-  apiKey    String
-  secretKey String
+  exchange   String
+  apiKey     String
+  secretKey  String
   passphrase String
+}
+
+model PaymentGateway {
+  id        String   @id @default(uuid()) @map("_id")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  guildId String
+  guild   Guild  @relation(fields: [guildId], references: [id])
+
+  paymentReceiverId String
+  paymentReceiver   User   @relation(fields: [paymentReceiverId], references: [id])
+
+  name String 
+
+  messageTextContent String @default("Unlock exclusive crypto insights and perks!")
+  embedTitle         String @default("Crypto Club Membership Plans")
+  embedDescription   String @default("Dive deeper into the world of cryptocurrency with a plan that fits your needs. Exclusive access to insights, tips, and premium support awaits!\n\n**Join now and get started!**\n\n**Plans:**\n\n💎 **Diamond Plan** - Ultimate access, including 1-on-1 sessions, advanced insights, and more. Perfect for the serious enthusiast.\n\n🚀 **Platinum Plan** - Get ahead with premium insights, direct support, and early access to new features.\n\n💰 **Gold Plan** - Great for starters. Access to basic insights and community support.\n\nChoose the plan that's right for you and **unlock your crypto journey**!")
+  embedColor         String @default("#F7931A") // Bitcoin orange
+  embedFooter        String @default("Have questions? Reach out to our support team!")
+  embedImageURL      String @default("https://res.cloudinary.com/datbbikfe/image/upload/v1720881507/CoinShot-Assets/v2vp0cebho5ljyfnfj2m.png")
+  embedThumbnailURL  String @default("https://res.cloudinary.com/datbbikfe/image/upload/v1720881507/CoinShot-Assets/eit6o6xj3uy2ssrih34m.jpg")
+  embedAuthor        String @default("Crypto Hub")
+
+  buttonLabel String  @default("Join Now")
+  buttonStyle String  @default("SUCCESS")
+
+  plans PaymentPlan[]
+  loggingChannelId String?
+}
+
+type PaymentPlan {
+  name        String
+  description String
+  amountUSD   Float
+
+  successAction   SuccessAction @default(assignRole)
+  assignRoleId      String?
+  assignChannelId   String?
+  triggerWebhookUrl String?
+}
+
+enum SuccessAction {
+  assignRole
+  assignChannel
+  triggerWebhook
 }

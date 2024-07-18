@@ -2,12 +2,12 @@
 
 import { createContext } from "react";
 
-export const ActiveIdContext = createContext("");
+export const ActiveGuildIdContext = createContext("");
 
-export default function ActiveIdProvider({ children, activeId }: { children: React.ReactNode, activeId: string }) {
+export default function ActiveGuildIdProvider({ children, activeId }: { children: React.ReactNode, activeId: string }) {
     return (
-        <ActiveIdContext.Provider value={activeId}>
+        <ActiveGuildIdContext.Provider value={activeId}>
             {children}
-        </ActiveIdContext.Provider>
+        </ActiveGuildIdContext.Provider>
     )
 }

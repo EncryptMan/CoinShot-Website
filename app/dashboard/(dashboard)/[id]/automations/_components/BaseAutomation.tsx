@@ -1,7 +1,7 @@
 'use client'
 
 import { LoadingSpinner } from "@/app/components/LoadingSpinner";
-import { ActiveIdContext } from "@/app/dashboard/(dashboard)/[id]/_components/ActiveIdProvider";
+import { ActiveGuildIdContext } from "@/app/dashboard/(dashboard)/[id]/_components/ActiveIdProvider";
 import { setGuildAutomationChannel, setGuildAutomationEnabled } from "@/app/lib/actions";
 import { Accordion, AccordionContent, AccordionItem } from "@/components/ui/accordion";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -12,7 +12,7 @@ import { useContext, useState } from "react";
 
 
 export default function BaseAutomation({ name, displayName, description, enabled, channels, currentChannelId, children }: { name: string, displayName?: string, description: string, enabled: boolean, channels: { id: string, name: string }[], currentChannelId: string | null, children?: React.ReactNode }) {
-    const guildId = useContext(ActiveIdContext)
+    const guildId = useContext(ActiveGuildIdContext)
 
     const [automationEnabled, setAutomationEnabled] = useState(enabled)
     const [isStateLoading, setIsStateLoading] = useState(false)

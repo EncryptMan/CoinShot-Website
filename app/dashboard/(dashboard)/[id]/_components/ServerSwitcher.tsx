@@ -7,12 +7,12 @@ import Image from "next/image"
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { GuildsContext } from "../../../_components/GuildsProvider";
-import { ActiveIdContext } from "./ActiveIdProvider";
+import { ActiveGuildIdContext } from "./ActiveIdProvider";
 
 
 export default function ServerSwitcher() {
     const guilds = useContext(GuildsContext).filter(guild => guild.botPresent);
-    const activeId = useContext<string>(ActiveIdContext);
+    const activeId = useContext<string>(ActiveGuildIdContext);
     const router = useRouter();
 
     function onValueChange(value: string) {

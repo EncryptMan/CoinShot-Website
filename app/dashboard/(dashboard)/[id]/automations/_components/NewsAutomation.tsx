@@ -3,7 +3,7 @@
 import { NewsCategory, NewsMessageStyle } from "@prisma/client";
 import BaseAutomation from "./BaseAutomation";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { ActiveIdContext } from "../../_components/ActiveIdProvider";
+import { ActiveGuildIdContext } from "../../_components/ActiveIdProvider";
 import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
@@ -15,7 +15,7 @@ import { LoadingSpinner } from "@/app/components/LoadingSpinner";
 
 
 export default function NewsAutomation({ name, displayName, description, enabled, channels, currentChannelId, selectedCategories, selectedMessageStyle, children }: { name: string, displayName?: string, description: string, enabled: boolean, channels: { id: string, name: string }[], currentChannelId: string | null, selectedCategories: NewsCategory[], selectedMessageStyle: NewsMessageStyle, children?: React.ReactNode }) {
-    const guildId = useContext(ActiveIdContext)
+    const guildId = useContext(ActiveGuildIdContext)
 
     const [messageStyle, setMessageStyle] = useState(selectedMessageStyle)
     const [isMessageStyleLoading, setIsMessageStyleLoading] = useState(false)
