@@ -227,7 +227,7 @@ type PaymentPlan {
   successAction   SuccessAction @default(assignRole)
   assignRoleId      String?
   assignChannelId   String?
-  triggerWebhookUrl String?
+  triggerWebhookURL String?
 }
 
 enum SuccessAction {
