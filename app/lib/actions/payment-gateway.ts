@@ -216,7 +216,7 @@ export async function updatePaymentGateway(guildId: string, data: PaymentGateway
     }
 
 
-    if (!["LINK", "PRIMARY", "SECONDARY", "SUCCESS", "DANGER"].includes(data.buttonStyle)) {
+    if (!["PRIMARY", "SECONDARY", "SUCCESS", "DANGER"].includes(data.buttonStyle)) {
         errors.buttonStyleError = "Button style must be one of LINK, PRIMARY, SECONDARY, SUCCESS, DANGER";
     }
     if (!isValidURL(data.embedImageURL)) {

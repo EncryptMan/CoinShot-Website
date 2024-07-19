@@ -197,7 +197,7 @@ function PlansEditor({ selectedGateway, setSelectedGateway, guildRoles, guildCha
             successAction: SuccessAction.assignRole,
             assignRoleId: null,
             assignChannelId: null,
-            triggerWebhookUrl: null
+            triggerWebhookURL: null
         });
         setDialogAction(DialogAction.create)
         setDialogOpen(true)
@@ -233,7 +233,7 @@ function PlansEditor({ selectedGateway, setSelectedGateway, guildRoles, guildCha
             return
         }
 
-        if (selectedPlan.successAction === SuccessAction.triggerWebhook && !selectedPlan.triggerWebhookUrl) {
+        if (selectedPlan.successAction === SuccessAction.triggerWebhook && !selectedPlan.triggerWebhookURL) {
             setDialogError("Webhook URL is required for trigger webhook success action")
             return
         }
@@ -338,7 +338,7 @@ function PlansEditor({ selectedGateway, setSelectedGateway, guildRoles, guildCha
                                     selectedPlan.successAction === SuccessAction.triggerWebhook &&
                                     <>
                                         <Label className="text-neutral-400">Webhook URL</Label>
-                                        <Input placeholder="https://example.com/webhook" value={selectedPlan.triggerWebhookUrl ?? ''} onChange={(e) => setSelectedPlan({ ...selectedPlan, triggerWebhookUrl: e.target.value })} />
+                                        <Input placeholder="https://example.com/webhook" value={selectedPlan.triggerWebhookURL ?? ''} onChange={(e) => setSelectedPlan({ ...selectedPlan, triggerWebhookURL: e.target.value })} />
                                         <div className="text-xs text-neutral-400">
                                             {"The bot will send the JSON data in the POST body request to the webhook URL. For example:"}
                                             <div style={{ overflowX: 'auto', whiteSpace: 'pre-wrap', wordWrap: 'break-word', margin: 0 }}>
@@ -414,9 +414,7 @@ function PaymentGatewayPreview({ gateway }: { gateway: PaymentGateway }) {
 
     let buttonClassName;
 
-    if (gateway.buttonStyle === "LINK") {
-        buttonClassName = "text-white bg-gray-800 hover:bg-gray-900";
-    } else if (gateway.buttonStyle === "PRIMARY") {
+    if (gateway.buttonStyle === "PRIMARY") {
         buttonClassName = "text-white bg-blue-500 hover:bg-blue-600";
     } else if (gateway.buttonStyle === "SECONDARY") {
         buttonClassName = "text-white bg-gray-500 hover:bg-gray-600";
@@ -804,7 +802,6 @@ function MessageEditor({ selectedGateway, setSelectedGateway, errors }: { select
                             <SelectValue placeholder="Select a button style" />
                         </SelectTrigger>
                         <SelectContent className="bg-gray-800">
-                            <SelectItem value="LINK" className="focus:bg-white/25">Link</SelectItem>
                             <SelectItem value="PRIMARY" className="focus:bg-white/25">Primary</SelectItem>
                             <SelectItem value="SECONDARY" className="focus:bg-white/25">Secondary</SelectItem>
                             <SelectItem value="SUCCESS" className="focus:bg-white/25">Success</SelectItem>
