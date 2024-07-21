@@ -96,14 +96,14 @@ model GuildCommands {
   chart          Boolean @default(true)
   heatmap        Boolean @default(true)
   fearGreedIndex Boolean @default(true)
-  meme           Boolean @default(true)
   information    Boolean @default(true)
   watchlist      Boolean @default(true)
   convert        Boolean @default(true)
-  ticTacToe      Boolean @default(true)
   news           Boolean @default(true)
   ask            Boolean @default(true)
   balance        Boolean @default(true)
+  createInvoice  Boolean @default(true)
+  walletAddress  Boolean @default(true)
 }
 
 model GuildAutomations {

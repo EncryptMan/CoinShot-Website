@@ -5,6 +5,9 @@ import { fetchGuilds } from "@/app/lib/actions";
 export default async function ServersView() {
     let guilds = await fetchGuilds();
 
+    // Sort guilds by member count
+    guilds.sort((a: Guild, b: Guild) => b.memberCount - a.memberCount);
+    
     // Move guild at end of array where bot is not present
     guilds.sort((a: Guild, b: Guild) => {
         const isBotPresentA = a.botPresent;
@@ -19,11 +22,12 @@ export default async function ServersView() {
         }
     });
 
+
     return (
         <>
             {guilds.length === 0 ? (
                 <span className="text-neutral-300 text-center text-lg">
-                    {"Oops! 😮 We couldn't find any servers where you have 'Manage Guild' or higher permissions. Just logged in? Please give us a moment, then refresh the page. 🔄 If you're still having trouble, try logging in again and we'll update your information. 🔄 Need a hand? 🤔 Don't hesitate to join our support server. 🚀 We're here to help and appreciate your patience! 😊"}
+                    {"We couldn't find any servers where you have 'Manage Guild' or higher permissions. Just logged in? Please wait a few seconds and refresh the page."}
                 </span>
             ) :
                 <Grid>
