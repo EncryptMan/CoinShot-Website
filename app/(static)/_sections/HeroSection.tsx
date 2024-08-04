@@ -15,7 +15,7 @@ export default function HeroSection() {
                     <p className={cn("text-xl max-sm:text-lg text-neutral-400", verala.className)}>Stay up to date with crypto market with instant access to real-time market data.</p>
                     <div className="flex items-center justify-start gap-5 text-xl max-sm:text-base">
                         <Button className='h-14 text-white' size={'lg'} asChild>
-                            <Link href={process.env.BOT_INVITE_URL ?? ''} aria-current="page">
+                            <Link href='/invite/homepage' aria-current="page" target="_blank">
                                 <div className='flex items-center justify-between gap-2 text-lg w-full h-full'>
                                     <DiscordLogo className='w-10 h-10' />
                                     Add To Discord

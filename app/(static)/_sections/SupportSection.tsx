@@ -12,7 +12,7 @@ export default function SupportSection() {
                 <h2 className={cn('text-center text-5xl text-neutral-200 mt-5', anton.className)}>Need Help?</h2>
                 <p className='text-neutral-300'>Join our support server to get support or request a new feature</p>
                 <Button variant={'default'} className='bg-neutral-200 hover:bg-neutral-400' asChild size={'lg'}>
-                    <Link href={process.env.SUPPORT_SERVER_URL ?? ''} aria-current="page">
+                    <Link href={process.env.SUPPORT_SERVER_URL ?? ''} aria-current="page" target="_blank">
                         <DiscordLogo className='h-5 w-5 mr-2' />
                         Join Support Server
                     </Link>
