@@ -235,3 +235,11 @@ enum SuccessAction {
   assignChannel
   triggerWebhook
 }
+
+model InviteTracking {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  createdAt DateTime @default(now())
+  
+  source String
+}
