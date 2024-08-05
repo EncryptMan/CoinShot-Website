@@ -4,7 +4,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: 'https://coinshot.pro/',
-      lastModified: new Date('2024-07-21'), // '2022-02-16T00:00:00Z'
+      lastModified: new Date('2024-08-05'), // '2022-02-16T00:00:00Z'
       changeFrequency: 'monthly',
       priority: 1,
     },

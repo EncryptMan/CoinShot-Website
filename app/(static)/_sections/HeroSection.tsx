@@ -11,8 +11,8 @@ export default function HeroSection() {
         <section id="hero" className="flex gap-1 items-center justify-center w-full pt-10 max-sm:pt-5 flex-col lg:flex-row px-5 mt-15">
             <div className='flex items-center justify-center'>
                 <div className="flex flex-col gap-7 max-sm:gap-3 justify-between max-w-lg max-lg:items-center max-lg:pb-5 max-lg:text-center">
-                    <h1 className={cn("text-5xl font-semibold  text-neutral-200", anton.className)}>Cryptocurrency Market Bot For Discord 📈</h1>
-                    <p className={cn("text-xl max-sm:text-lg text-neutral-400", verala.className)}>Stay up to date with crypto market with instant access to real-time market data.</p>
+                    <h1 className={cn("text-5xl font-semibold  text-neutral-200", anton.className)}>Your All-in-One Crypto Bot for Discord 📈</h1>
+                    <p className={cn("text-xl max-sm:text-lg text-neutral-400", verala.className)}>Stay ahead of the Crypto Curve with our Feature-Packed Bot.</p>
                     <div className="flex items-center justify-start gap-5 text-xl max-sm:text-base">
                         <Button className='h-14 text-white' size={'lg'} asChild>
                             <Link href='/invite/homepage' aria-current="page" target="_blank">
