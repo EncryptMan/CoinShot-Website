@@ -55,6 +55,8 @@ model Guild {
   guildSettings    GuildSettings?
   guildCommands    GuildCommands?
   guildAutomations GuildAutomations?
+  guildCustomBot   GuildCustomBot?
+  guildCustomAI    GuildCustomAI?
 
   name             String
   iconUrl          String
@@ -104,6 +106,44 @@ model GuildCommands {
   balance        Boolean @default(true)
   createInvoice  Boolean @default(true)
   walletAddress  Boolean @default(true)
+}
+
+model GuildCustomBot {
+  id    String @id @map("_id")
+  guild Guild  @relation(fields: [id], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  enabled Boolean @default(false)
+  name String @default("CoinShot Premium")
+  nameColor String @default("#EAC645") // Gold color
+  imageUrl String?
+}
+
+model GuildCustomAI {
+  id    String @id @map("_id")
+  guild Guild  @relation(fields: [id], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  enabled       Boolean     @default(false)
+  instructions  String      @default("You are a cryptocurrency discord bot named CoinShot. Use a friendly way of chatting along with some emojis. Your responses should be short and concise.")
+  knowledgeBase Knowledge[]
+
+  fetchPrice     Boolean @default(true)
+  fetchNews      Boolean @default(true)
+  searchInternet Boolean @default(true)
+  showChart      Boolean @default(true)
+
+  addKnowledgeChannelId String?
+}
+
+type Knowledge {
+  title      String
+  content    String
+  embeddings String[]
 }
 
 model GuildAutomations {
@@ -201,7 +241,7 @@ model PaymentGateway {
   paymentReceiverId String
   paymentReceiver   User   @relation(fields: [paymentReceiverId], references: [id])
 
-  name String 
+  name String
 
   messageTextContent String @default("Unlock exclusive crypto insights and perks!")
   embedTitle         String @default("Crypto Club Membership Plans")
@@ -212,10 +252,10 @@ model PaymentGateway {
   embedThumbnailURL  String @default("https://res.cloudinary.com/datbbikfe/image/upload/v1720881507/CoinShot-Assets/eit6o6xj3uy2ssrih34m.jpg")
   embedAuthor        String @default("Crypto Hub")
 
-  buttonLabel String  @default("Join Now")
-  buttonStyle String  @default("SUCCESS")
+  buttonLabel String @default("Join Now")
+  buttonStyle String @default("SUCCESS")
 
-  plans PaymentPlan[]
+  plans            PaymentPlan[]
   loggingChannelId String?
 }
 
@@ -224,7 +264,7 @@ type PaymentPlan {
   description String
   amountUSD   Float
 
-  successAction   SuccessAction @default(assignRole)
+  successAction     SuccessAction @default(assignRole)
   assignRoleId      String?
   assignChannelId   String?
   triggerWebhookURL String?
@@ -240,6 +280,6 @@ model InviteTracking {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
   createdAt DateTime @default(now())
-  
+
   source String
 }

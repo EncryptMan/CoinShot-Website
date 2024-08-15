@@ -248,6 +248,90 @@ export async function fetchGuildCommands(guildId: string) {
   return null;
 }
 
+export async function fetchGuildCustomBot(guildId: string) {
+  const session = await getServerSession(authOptions);
+
+  try {
+    const guildUser = await prisma.guildUser.findUnique({
+      where: {
+        userId_guildId: {
+          userId: session?.user?.id ?? '',
+          guildId,
+        },
+      },
+      include: {
+        guild: {
+          include: {
+            guildCustomBot: true,
+          },
+        },
+      }
+    })
+
+    if (guildUser?.guild.botPresent) {
+      if (guildUser.guild.guildCustomBot) {
+        console.log('Custom bot fetched from database');
+        return guildUser.guild.guildCustomBot;
+      } else {
+        const customBot = await prisma.guildCustomBot.create({
+          data: {
+            id: guildId
+          },
+        });
+        console.log('Custom bot created');
+        return customBot;
+      }
+    }
+  }
+  catch (error) {
+    console.error(error);
+  }
+
+  return null;
+}
+
+export async function fetchGuildCustomAI(guildId: string) {
+  const session = await getServerSession(authOptions);
+
+  try {
+    const guildUser = await prisma.guildUser.findUnique({
+      where: {
+        userId_guildId: {
+          userId: session?.user?.id ?? '',
+          guildId,
+        },
+      },
+      include: {
+        guild: {
+          include: {
+            guildCustomAI: true,
+          },
+        },
+      }
+    })
+
+    if (guildUser?.guild.botPresent) {
+      if (guildUser.guild.guildCustomAI) {
+        console.log('Custom AI fetched from database');
+        return guildUser.guild.guildCustomAI;
+      } else {
+        const customAI = await prisma.guildCustomAI.create({
+          data: {
+            id: guildId
+          },
+        });
+        console.log('Custom AI created');
+        return customAI;
+      }
+    }
+  }
+  catch (error) {
+    console.error(error);
+  }
+
+  return null;
+}
+
 export async function fetchGuildAutomations(guildId: string) {
   const session = await getServerSession(authOptions);
 
