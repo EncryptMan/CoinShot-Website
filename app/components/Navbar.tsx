@@ -57,11 +57,11 @@ export default function Navbar() {
                     <NavItems rowClassName="gap-3 max-lg:gap-0 max-md:hidden" buttonClassName="text-lg max-lg:text-md max-lg:p-2" />
                 </div>
                 <div className="flex items-center gap-2 lg:gap-4">
-                    <Button size={'sm'} variant={'secondary'} className="bg-yellow-500/20 hover:bg-yellow-500/50 text-yellow-400">
+                    {/* <Button size={'sm'} variant={'secondary'} className="bg-yellow-500/20 hover:bg-yellow-500/50 text-yellow-400">
                         <Link href={'/premium'} className="flex items-center">
                             <IoSparklesSharp fill="#FACC15" size={20} />&nbsp;Premium
                         </Link>
-                    </Button>
+                    </Button> */}
                     <AuthButton className="max-md:hidden" />
                     <Sheet open={isSidebarOpen} onOpenChange={setSidebarOpen}>
                         <SheetTrigger className="block md:hidden" onClick={() => setSidebarOpen(true)} asChild><Button variant={'ghost'} className="p-0"><CgMenuRight size={25} className="lg:hidden block text-neutral-300" /></Button></SheetTrigger>

@@ -6,27 +6,27 @@ import Image from "next/image";
 export default function CustomersSection() {
     return (
         <section id='customers' className={cn('py-12 -mt-10 px-5 bg-gray-700', verala.className)}>
-            <h2 className={cn('text-center text-4xl text-neutral-200 mt-5 font-bold max-md:text-3xl', anton.className)}>CoinShot is trusted by more than 500 servers</h2>
+            <h2 className={cn('text-center text-4xl text-neutral-200 mt-5 font-bold max-md:text-3xl', anton.className)}>CoinShot is trusted by more than 950 servers</h2>
             <div className="max-w-3xl w-full mx-auto mt-7 grid grid-cols-2 gap-8 max-lg:grid-cols-1 max-md:gap-4 px-10 max-md:px-5">
                 <ServerCard
                     name='BLASTER'
                     iconUrl='https://cdn.discordapp.com/icons/1192038218737131632/ebd75cc64e33dd36723d80a5f76a05c6.png?size=1024'
-                    memberCount={268034}
+                    memberCount={222517}
                 />
                 <ServerCard
                     name='Orochi Network'
                     iconUrl='https://cdn.discordapp.com/icons/1069494820386635796/1b4e6416395d7945eb1d8b4f97010135.png?size=1024'
-                    memberCount={20163}
+                    memberCount={67831}
+                />
+                <ServerCard
+                    name='GemHUB'
+                    iconUrl='https://cdn.discordapp.com/icons/1085013063226363976/d0f491a879d4560844921d893407276b.png?size=1024'
+                    memberCount={53055}
                 />
                 <ServerCard
                     name='BitFight'
                     iconUrl='https://cdn.discordapp.com/icons/1198142061417877525/a_8209ae2537ca3ebf8b4ef941234e6d6b.gif?size=1024'
-                    memberCount={15159}
-                />
-                <ServerCard
-                    name='WeCopyTrade.com'
-                    iconUrl='https://cdn.discordapp.com/icons/1179341576519037018/f49a34488c1a75bb706dae5f5729846d.png?size=1024'
-                    memberCount={6928}
+                    memberCount={27736}
                 />
             </div>
         </section>
